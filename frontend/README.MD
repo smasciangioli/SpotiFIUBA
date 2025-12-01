@@ -1,0 +1,2 @@
+Carpeta del frontend.
+
