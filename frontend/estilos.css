@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    background-color: #121212;
+}
+
+header {
+    height: 60px;
+    background-color: #1c9fdb;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.Spoti {
+    color: #121212;
+}
+
+.FIUBA {
+    color: white;
+}
