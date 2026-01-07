@@ -4,6 +4,8 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
     height: 60px;
     background-color: #1c9fdb;
     display: flex;
@@ -11,6 +13,7 @@ header {
     padding-left: 10px;
     font-size: 40px;
     font-weight: bold;
+    z-index: 1000;
 }
 
 .Spoti {
