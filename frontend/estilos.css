@@ -14,12 +14,35 @@ header {
     font-size: 40px;
     font-weight: bold;
     z-index: 1000;
+    margin-bottom: 0;
 }
 
-.Spoti {
+.negro {
     color: #121212;
 }
 
-.FIUBA {
+.blanco {
     color: white;
+}
+
+.azul {
+    color: #1c9fdb;
+}
+
+.saludo {
+    margin-top: 0;
+    color: white;
+    font-size: 25px;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.separador {
+    border: none;
+    height: 2px;
+    background-color: #1c9fdb;
+    width: 25%;
+    margin-left: 0;
+    margin-top: -5px;
 }
