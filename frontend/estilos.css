@@ -34,9 +34,9 @@ header {
     margin-top: 0;
     color: white;
     font-size: 25px;
-    align-items: center;
     padding-left: 10px;
     font-weight: bold;
+    text-align: center;
 }
 
 .logo-spotifiuba {
@@ -48,7 +48,6 @@ header {
     height: 2px;
     background-color: #1c9fdb;
     width: 25%;
-    margin-left: 0;
     margin-top: -5px;
 }
 
