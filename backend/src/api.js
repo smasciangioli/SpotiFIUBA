@@ -7,8 +7,9 @@ const {
 } = require('./consultas.js')
 
 //get all canciones
-app.get('/home/canciones', (req, res) => {
-  
+app.get('/home/canciones', async (req, res) => {
+  const canciones = await getAllCanciones();
+  res.json(canciones)
 })
 
 app.listen(port, () => {

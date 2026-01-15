@@ -9,8 +9,13 @@ const pool = new Pool({
 });
 
 
-function getAllCanciones() {
-
+async function getAllCanciones() {
+    const result = await pool.query(
+        `SELECT c.*, u.nombre_usuario
+        FROM canciones c
+        JOIN usuarios u ON c.usuario_id=u.id`
+    );
+    return result.rows;
 }
 
 module.exports = {
