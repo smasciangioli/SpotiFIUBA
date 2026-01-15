@@ -2,8 +2,13 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/home', (req, res) => {
-  res.send("hello world")
+const {
+  getAllCanciones
+} = require('./consultas.js')
+
+//get all canciones
+app.get('/home/canciones', (req, res) => {
+  
 })
 
 app.listen(port, () => {
