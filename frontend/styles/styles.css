@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #121212;
+    height: 200vh;
 }
 
 header {
@@ -13,7 +14,7 @@ header {
     padding-left: 10px;
     font-size: 40px;
     font-weight: bold;
-    z-index: 1000;
+    z-index: 10;
     margin-bottom: 0;
     justify-content: space-between;
 }
@@ -110,4 +111,29 @@ header {
 .link-registro {
     color: #1c9fdb;
     cursor: pointer;
+}
+
+#subir-musica {
+    position: fixed;
+    bottom: 60px;    
+    right: 60px;
+    color: white;
+    background-color: #1c9fdb;
+    border: hidden;
+    font-size: 80px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+    font-size:35px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#subir-musica:active {
+    background-color: #10b1fc;
+    transform: translateY(1px)
 }
