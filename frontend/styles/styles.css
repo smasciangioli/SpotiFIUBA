@@ -137,3 +137,31 @@ header {
     background-color: #10b1fc;
     transform: translateY(1px)
 }
+
+#subir-musica .tooltip {
+    position: absolute;
+    bottom: 70px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#subir-musica:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
