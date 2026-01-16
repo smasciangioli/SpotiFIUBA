@@ -19,7 +19,7 @@ header {
 }
 
 .logo-spotifiuba {
-    cursor: default;
+    cursor: pointer;
 }
 
 .negro {
@@ -52,14 +52,16 @@ header {
 }
 
 .botones-header {
+
     display: flex;
     gap: 10px;
+    
 }
 
 .boton-header {
     padding: 10px 15px;
     border: none;
-    cursor: default;
+    cursor: pointer;
     border-radius: 20px;
     font-weight: bold;
     color: #1c9fdb;
