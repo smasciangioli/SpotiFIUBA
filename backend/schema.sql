@@ -1,6 +1,7 @@
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre_usuario VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     fecha_creacion DATE NOT NULL,
     fecha_modificacion DATE NOT NULL 
 );
@@ -11,6 +12,8 @@ CREATE TABLE canciones (
     duracion DECIMAL(10,2) NOT NULL,
     artista VARCHAR(100) NOT NULL,
     usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
+    link_portada VARCHAR(400),
+    link_audio VARCHAR(400) NOT NULL,
     fecha_creacion DATE NOT NULL,
     fecha_modificacion DATE NOT NULL
 );
