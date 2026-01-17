@@ -18,6 +18,21 @@ async function getAllCanciones() {
     return result.rows;
 }
 
+async function getCancionByName(nombre){
+    const result = await pool.query(`SELECT c.*, u.nombre_usuario
+        FROM canciones c
+        JOIN usuarios u ON c.usuario_id=u.id
+        WHERE c.nombre ILIKE $1`, [nombre]
+    );
+
+    if (result.rowCount === 0) {
+        return undefined;
+    }
+    
+    return result.rows;
+}
+
 module.exports = {
-    getAllCanciones
+    getAllCanciones,
+    getCancionByName
 };
