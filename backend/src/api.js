@@ -5,7 +5,8 @@ const port = 3000
 const {
   getAllCanciones,
   getCancionByName,
-  getAllPlaylists
+  getAllPlaylists,
+  getPlaylistByID
 } = require('./consultas.js')
 
 //Consigue todas las canciones
@@ -29,6 +30,16 @@ app.get('/home/canciones/:nombre' , async (req, res) => {
 app.get('/home/playlists' , async (req, res) => {
   const playlists = await getAllPlaylists();
 
+  res.json(playlists);
+})
+
+app.get('/home/playlists/:id' , async (req, res) => {
+  const playlists = await getPlaylistByID(req.params.id);
+
+  if (playlists === undefined){
+    res.sendStatus(404);
+  }
+  
   res.json(playlists);
 })
 

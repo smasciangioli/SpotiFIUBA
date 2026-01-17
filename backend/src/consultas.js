@@ -44,8 +44,24 @@ async function getAllPlaylists(){
     return result.rows;
 }
 
+async function getPlaylistByID(id){
+    const result = await pool.query(
+        `SELECT * FROM playlists
+        WHERE id = $1`, [id]
+    );    
+
+    if (result.rowCount === 0) {
+        return undefined;
+    }
+    
+    return result.rows;
+}
+
+
+
 module.exports = {
     getAllCanciones,
     getCancionByName,
-    getAllPlaylists
+    getAllPlaylists,
+    getPlaylistByID
 };
