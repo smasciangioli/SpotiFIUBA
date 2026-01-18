@@ -10,7 +10,8 @@ const {
   getUsuariosByID,
   getUsuariosByName,
   getUsuariosByEmail,
-  CreateUsuario
+  createUsuario,
+  removeUsuario,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -108,13 +109,27 @@ app.post('/home/usuarios' , async (req, res) => {
     return res.status(400).send("No se envio la carrera");
   }
 
-  const usuario = await CreateUsuario(nombre_usuario, email, carrera);
+  const usuario = await createUsuario(nombre_usuario, email, carrera);
 
   if (usuario === undefined){
     res.sendStatus(500);
   }
 
   res.status(201).json(usuario);
+})
+
+app.delete('/home/usuarios/:id' , async (req, res) => {
+  const usuario = await getUsuariosByID(req.params.id);
+  
+  if(usuario === undefined){
+    return res.sendStatus(404);
+  }
+
+  if(!(await removeUsuario(req.params.id))){
+    return res.sendStatus(500);
+  }
+
+  res.json(usuario);
 })
 
 app.listen(port, () => {

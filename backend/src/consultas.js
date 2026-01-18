@@ -98,7 +98,7 @@ async function getUsuariosByEmail(email){
     return result.rows;
 }
 
-async function CreateUsuario(nombre_usuario, email, carrera) {
+async function createUsuario(nombre_usuario, email, carrera) {
     try{
         const result = await pool.query(
         "INSERT INTO usuarios (nombre_usuario, email, carrera, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_DATE)",
@@ -115,6 +115,15 @@ async function CreateUsuario(nombre_usuario, email, carrera) {
     }
 }
 
+async function removeUsuario(id){
+    try{
+        await pool.query("DELETE FROM usuarios WHERE id = $1", [id]);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 
 module.exports = {
     getAllCanciones,
@@ -124,5 +133,6 @@ module.exports = {
     getUsuariosByID,
     getUsuariosByName,
     getUsuariosByEmail,
-    CreateUsuario,
+    createUsuario,
+    removeUsuario,
 };
