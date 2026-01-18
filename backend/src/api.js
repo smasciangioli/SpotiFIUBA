@@ -17,14 +17,14 @@ const {
 app.use(express.json())
 
 //Consigue todas las canciones
-app.get('/home/canciones', async (req, res) => {
+app.get('/canciones', async (req, res) => {
   const canciones = await getAllCanciones();
 
   res.json(canciones)
 })
 
 //Consigue las conciones por nombre
-app.get('/home/canciones/:nombre' , async (req, res) => {
+app.get('/canciones/:nombre' , async (req, res) => {
   const canciones = await getCancionByName(req.params.nombre);
 
   if (canciones === undefined){
@@ -34,13 +34,13 @@ app.get('/home/canciones/:nombre' , async (req, res) => {
   res.json(canciones);
 })
 
-app.get('/home/playlists' , async (req, res) => {
+app.get('/playlists' , async (req, res) => {
   const playlists = await getAllPlaylists();
 
   res.json(playlists);
 })
 
-app.get('/home/playlists/:id' , async (req, res) => {
+app.get('/playlists/:id' , async (req, res) => {
   const playlists = await getPlaylistByID(req.params.id);
 
   if (playlists === undefined){
@@ -50,7 +50,7 @@ app.get('/home/playlists/:id' , async (req, res) => {
   res.json(playlists);
 })
 
-app.get('/home/usuarios/:id' , async (req, res) => {
+app.get('/usuarios/:id' , async (req, res) => {
   const usuario = await getUsuariosByID(req.params.id);
   
   if(usuario === undefined){
@@ -60,7 +60,7 @@ app.get('/home/usuarios/:id' , async (req, res) => {
   res.json(usuario);
 })
 
-app.get('/home/usuarios_nombre/:nombre' , async (req, res) => {
+app.get('/usuarios_nombre/:nombre' , async (req, res) => {
   const usuario = await getUsuariosByName(req.params.nombre);
   
   if(usuario === undefined){
@@ -70,7 +70,7 @@ app.get('/home/usuarios_nombre/:nombre' , async (req, res) => {
   res.json(usuario);
 })
 
-app.get('/home/usuarios_email/:email' , async (req, res) => {
+app.get('/usuarios_email/:email' , async (req, res) => {
   const usuario = await getUsuariosByEmail(req.params.email);
   
   if(usuario === undefined){
@@ -80,7 +80,7 @@ app.get('/home/usuarios_email/:email' , async (req, res) => {
   res.json(usuario);
 })
 
-app.post('/home/usuarios' , async (req, res) => {
+app.post('/usuarios' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
   }
@@ -118,7 +118,7 @@ app.post('/home/usuarios' , async (req, res) => {
   res.status(201).json(usuario);
 })
 
-app.delete('/home/usuarios/:id' , async (req, res) => {
+app.delete('/usuarios/:id' , async (req, res) => {
   const usuario = await getUsuariosByID(req.params.id);
   
   if(usuario === undefined){
