@@ -2,6 +2,7 @@ CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre_usuario VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    carrera VARCHAR(50),
     fecha_creacion DATE NOT NULL,
     fecha_modificacion DATE NOT NULL 
 );
@@ -22,6 +23,7 @@ CREATE TABLE playlists (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     creador_id INTEGER NOT NULL REFERENCES usuarios(id),
+    link_portada VARCHAR(400),
     fecha_creacion DATE NOT NULL,
     fecha_modificacion DATE NOT NULL
 );
