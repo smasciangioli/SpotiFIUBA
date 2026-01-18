@@ -46,22 +46,83 @@ async function getAllPlaylists(){
 
 async function getPlaylistByID(id){
     const result = await pool.query(
-        `SELECT * FROM playlists
-        WHERE id = $1`, [id]
+        `SELECT p.*, u.nombre_usuario
+        FROM playlists p
+        JOIN usuarios u ON p.creador_id = u.id
+        WHERE p.id = $1`, [id]
     );    
 
     if (result.rowCount === 0) {
         return undefined;
     }
     
+    return result.rows[0];
+}
+
+async function getUsuariosByID(id){
+    const result = await pool.query(
+        `SELECT * FROM usuarios
+        WHERE id = $1`, [id]
+    );
+
+    if (result.rowCount === 0){
+        return undefined;
+    }
+
+    return result.rows[0];
+}
+
+async function getUsuariosByName(nombre){
+    const result = await pool.query(
+        `SELECT * FROM usuarios
+        WHERE nombre_usuario ILIKE $1`, [nombre]
+    );
+
+    if (result.rowCount === 0){
+        return undefined;
+    }
+
     return result.rows;
 }
 
+async function getUsuariosByEmail(email){
+    const result = await pool.query(
+        `SELECT * FROM usuarios
+        WHERE email ILIKE $1`, [email]
+    );
+
+    if (result.rowCount === 0){
+        return undefined;
+    }
+
+    return result.rows;
+}
+
+async function CreateUsuario(nombre_usuario, email, carrera) {
+    try{
+        const result = await pool.query(
+        "INSERT INTO usuarios (nombre_usuario, email, carrera, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_DATE)",
+            [nombre_usuario, email, carrera]
+        );
+    } catch{
+        return undefined;
+    }
+
+    return{
+        nombre_usuario,
+        email,
+        carrera,
+    }
+}
 
 
 module.exports = {
     getAllCanciones,
     getCancionByName,
     getAllPlaylists,
-    getPlaylistByID
+    getPlaylistByID,
+    getUsuariosByID,
+    getUsuariosByName,
+    getUsuariosByEmail,
+    CreateUsuario,
 };
