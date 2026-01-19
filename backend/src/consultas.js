@@ -27,7 +27,7 @@ async function getCancionByName(nombre){
         WHERE c.nombre ILIKE $1`, [nombre]
     );
 
-    if (result.rowCount === 0) {
+    if (result.rows.length === 0) {
         return undefined;
     }
     
@@ -52,7 +52,7 @@ async function getPlaylistByID(id){
         WHERE p.id = $1`, [id]
     );    
 
-    if (result.rowCount === 0) {
+    if (result.rows.length === 0) {
         return undefined;
     }
     
@@ -65,7 +65,7 @@ async function getUsuariosByID(id){
         WHERE id = $1`, [id]
     );
 
-    if (result.rowCount === 0){
+    if (result.rows.length === 0){
         return undefined;
     }
 
@@ -78,7 +78,7 @@ async function getUsuariosByName(nombre){
         WHERE nombre_usuario ILIKE $1`, [nombre]
     );
 
-    if (result.rowCount === 0){
+    if (result.rows.length === 0){
         return undefined;
     }
 
@@ -91,7 +91,7 @@ async function getUsuariosByEmail(email){
         WHERE email ILIKE $1`, [email]
     );
 
-    if (result.rowCount === 0){
+    if (result.rows.length === 0){
         return undefined;
     }
 
@@ -104,6 +104,11 @@ async function createUsuario(nombre_usuario, email, carrera) {
         "INSERT INTO usuarios (nombre_usuario, email, carrera, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_DATE)",
             [nombre_usuario, email, carrera]
         );
+
+        if (result.rowCount === 0){
+            return undefined;
+        }
+
     } catch{
         return undefined;
     }
@@ -117,8 +122,9 @@ async function createUsuario(nombre_usuario, email, carrera) {
 
 async function removeUsuario(id){
     try{
-        await pool.query("DELETE FROM usuarios WHERE id = $1", [id]);
-        return true;
+        const result = await pool.query("DELETE FROM usuarios WHERE id = $1", [id]);
+        return (result.rowCount === 1);
+        
     } catch {
         return false;
     }
