@@ -265,3 +265,18 @@ header {
     visibility: hidden;
     pointer-events: none;
 }
+
+.boton-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.boton-subir {
+    border-radius: 20px;
+    border: hidden;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    background-color: #1c9fdb;
+    margin-top: -10px;
+}
