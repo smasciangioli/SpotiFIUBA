@@ -12,6 +12,8 @@ const {
   getUsuariosByEmail,
   createUsuario,
   removeUsuario,
+  updateUsuario_nombre,
+  updateUsuario_carrera,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -130,6 +132,42 @@ app.delete('/usuarios/:id' , async (req, res) => {
   }
 
   res.json(usuario);
+})
+
+app.patch('/usuarios/:id' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const id = req.params.id;
+  const nombre_usuario = req.body.nombre_usuario;
+  const carrera = req.body.carrera;
+
+  if((await getUsuariosByID())!== undefined){
+    return res.status(404).send("No existe usuario con ese id");
+  }
+
+  let usuario;
+
+  if (nombre_usuario !== undefined && carrera !== undefined){
+    usuario = await updateUsuario_nombre(id, nombre_usuario);
+    usuario = await updateUsuario_carrera(id, carrera);
+  }
+    else if (nombre_usuario !== undefined){
+      usuario = await updateUsuario_nombre(id, nombre_usuario);
+    }
+
+    else if (carrera !== undefined){
+      usuario = await updateUsuario_carrera(id, carrera);
+    }
+  
+
+  if(usuario === undefined){
+    res.sendStatus(500);
+  }
+
+  res.json(usuario)
+
 })
 
 app.listen(port, () => {

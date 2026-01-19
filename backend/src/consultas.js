@@ -124,10 +124,52 @@ async function removeUsuario(id){
     try{
         const result = await pool.query("DELETE FROM usuarios WHERE id = $1", [id]);
         return (result.rowCount === 1);
-        
+
     } catch {
         return false;
     }
+}
+
+async function updateUsuario_nombre(id, nuevo_nombre){
+    try {
+        const result = await pool.query(
+            "UPDATE usuarios SET nombre_usuario = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nuevo_nombre]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nuevo_nombre,
+        };
+
+    } catch {
+        return undefined;
+    }
+
+}
+
+async function updateUsuario_carrera(id, carrera){
+    try {
+        const result = await pool.query(
+            "UPDATE usuarios SET carrera = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, carrera]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            carrera,
+        };
+
+    } catch {
+        return undefined;
+    }
+
 }
 
 
@@ -141,4 +183,6 @@ module.exports = {
     getUsuariosByEmail,
     createUsuario,
     removeUsuario,
+    updateUsuario_nombre,
+    updateUsuario_carrera,
 };
