@@ -59,6 +59,27 @@ async function getPlaylistByID(id){
     return result.rows[0];
 }
 
+async function createPlaylist(nombre, creador_id, link_portada){
+    try{
+        const result = pool.query(
+            "INSERT INTO playlists (nombre, creador_id, link_portada, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_DATE)",
+            [nombre, creador_id, link_portada]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+    } catch{
+        return undefined;
+    }
+
+    return{
+        nombre,
+        creador_id,
+        link_portada,
+    }
+}
+
 async function getUsuariosByID(id){
     const result = await pool.query(
         `SELECT * FROM usuarios
@@ -200,6 +221,7 @@ module.exports = {
     getCancionByName,
     getAllPlaylists,
     getPlaylistByID,
+    createPlaylist,
     getUsuariosByID,
     getUsuariosByName,
     getUsuariosByEmail,

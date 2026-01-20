@@ -7,6 +7,7 @@ const {
   getCancionByName,
   getAllPlaylists,
   getPlaylistByID,
+  createPlaylist,
   getUsuariosByID,
   getUsuariosByName,
   getUsuariosByEmail,
@@ -51,6 +52,32 @@ app.get('/playlists/:id' , async (req, res) => {
   }
   
   res.json(playlists);
+})
+
+app.post('/playlists' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const nombre = req.body.nombre;
+  const creador_id = req.body.creador_id;
+  const link_portada = req.body.link_portada;
+
+  if (nombre === undefined){
+    return res.status(400).send("No se envio el nombre");
+  }
+
+  if (creador_id === undefined){
+    return res.status(400).send("No se envio el id del creador");
+  }
+
+  const playlist = await createPlaylist(nombre, creador_id, link_portada);
+
+  if (playlist === undefined){
+    res.sendStatus(500);
+  }
+
+  res.status(201).json(playlist);
 })
 
 app.get('/usuarios/:id' , async (req, res) => {
