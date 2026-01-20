@@ -34,6 +34,46 @@ async function getCancionByName(nombre){
     return result.rows;
 }
 
+async function getCancionByID(id){
+    const result = await pool.query(
+        `SELECT c.*, u.nombre_usuario
+        FROM canciones c
+        JOIN usuarios u ON c.usuario_id=u.id
+        WHERE c.id = $1`, [id]
+    );
+
+    if (result.rows.length === 0) {
+        return undefined;
+    }
+    
+    return result.rows;
+}
+
+async function createCancion(nombre, duracion, artista, usuario_id, link_portada, link_audio){
+    try{   
+        const result = await pool.query(
+            `INSERT INTO canciones (nombre, duracion, artista, usuario_id, link_portada, link_audio, fecha_creacion, fecha_modificacion)
+            VALUES ($1, $2, $3, $4, $5, $6, CURRENT_DATE, CURRENT_DATE)`,
+            [nombre, duracion, artista, usuario_id, link_portada, link_audio]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+    } catch{
+        return undefined;
+    }
+
+    return{
+        nombre,
+        duracion,
+        artista,
+        usuario_id,
+        link_portada,
+        link_audio,
+    }
+}
+
 async function getAllPlaylists(){
     const result = await pool.query (
         `SELECT p.*, u.nombre_usuario
@@ -271,6 +311,8 @@ async function updateUsuarioContraseña(id, contraseña){
 module.exports = {
     getAllCanciones,
     getCancionByName,
+    getCancionByID,
+    createCancion,
     getAllPlaylists,
     getPlaylistByID,
     createPlaylist,

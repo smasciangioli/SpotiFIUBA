@@ -5,6 +5,8 @@ const port = 3000
 const {
   getAllCanciones,
   getCancionByName,
+  getCancionByID,
+  createCancion,
   getAllPlaylists,
   getPlaylistByID,
   createPlaylist,
@@ -39,6 +41,47 @@ app.get('/canciones/:nombre' , async (req, res) => {
   }
 
   res.json(canciones);
+})
+
+app.post('/canciones' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const nombre = req.body.nombre;
+  const duracion = req.body.duracion;
+  const artista = req.body.artista;
+  const usuario_id = req.body.usuario_id;
+  const link_portada = req.body.link_portada
+  const link_audio = req.body.link_audio;
+
+  if (nombre === undefined){
+    return res.status(400).send("No se envio el nombre");
+  }
+
+  if (duracion === undefined){
+    return res.status(400).send("No se envio la duracion");
+  }
+
+  if (artista === undefined){
+    return res.status(400).send("No se envio el artista");
+  }
+
+  if (usuario_id === undefined){
+    return res.status(400).send("No se envio el usuario_id");
+  }
+
+  if (link_audio === undefined){
+    return res.status(400).send("No se envio el link del audio");
+  }
+
+  const cancion = await createCancion(nombre, duracion, artista, usuario_id, link_portada, link_audio);
+
+  if (cancion === undefined){
+    res.sendStatus(500);
+  }
+
+  res.status(201).json(cancion);
 })
 
 app.get('/playlists' , async (req, res) => {
