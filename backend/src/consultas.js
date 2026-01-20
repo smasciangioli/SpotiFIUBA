@@ -90,6 +90,48 @@ async function removePlaylist(id){
     }
 }
 
+async function updatePlaylistNombre(id, nuevo_nombre){
+    try {
+        const result = await pool.query(
+            "UPDATE playlists SET nombre = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nuevo_nombre]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nuevo_nombre,
+        };
+
+    } catch {
+        return undefined;
+    }
+
+}
+
+async function updatePlaylistPortada(id, nueva_portada){
+    try {
+        const result = await pool.query(
+            "UPDATE playlists SET link_portada = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nueva_portada]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nueva_portada,
+        };
+
+    } catch {
+        return undefined;
+    }
+
+}
+
 async function getUsuariosByID(id){
     const result = await pool.query(
         `SELECT * FROM usuarios
@@ -162,7 +204,7 @@ async function removeUsuario(id){
     }
 }
 
-async function updateUsuario_nombre(id, nuevo_nombre){
+async function updateUsuarioNombre(id, nuevo_nombre){
     try {
         const result = await pool.query(
             "UPDATE usuarios SET nombre_usuario = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nuevo_nombre]
@@ -183,7 +225,7 @@ async function updateUsuario_nombre(id, nuevo_nombre){
 
 }
 
-async function updateUsuario_carrera(id, carrera){
+async function updateUsuarioCarrera(id, carrera){
     try {
         const result = await pool.query(
             "UPDATE usuarios SET carrera = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, carrera]
@@ -204,7 +246,7 @@ async function updateUsuario_carrera(id, carrera){
 
 }
 
-async function updateUsuario_contraseña(id, contraseña){
+async function updateUsuarioContraseña(id, contraseña){
     try {
         const result = await pool.query(
             "UPDATE usuarios SET contrasenia = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, contraseña]
@@ -233,12 +275,14 @@ module.exports = {
     getPlaylistByID,
     createPlaylist,
     removePlaylist,
+    updatePlaylistNombre,
+    updatePlaylistPortada,
     getUsuariosByID,
     getUsuariosByName,
     getUsuariosByEmail,
     createUsuario,
     removeUsuario,
-    updateUsuario_nombre,
-    updateUsuario_carrera,
-    updateUsuario_contraseña,
+    updateUsuarioNombre,
+    updateUsuarioCarrera,
+    updateUsuarioContraseña,
 };

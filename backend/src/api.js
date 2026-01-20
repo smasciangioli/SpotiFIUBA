@@ -14,9 +14,11 @@ const {
   getUsuariosByEmail,
   createUsuario,
   removeUsuario,
-  updateUsuario_nombre,
-  updateUsuario_carrera,
-  updateUsuario_contraseña,
+  updateUsuarioNombre,
+  updateUsuarioCarrera,
+  updateUsuarioContraseña,
+  updatePlaylistPortada,
+  updatePlaylistNombre,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -93,6 +95,46 @@ app.delete('/playlists/:id' , async (req, res) => {
   }
 
   res.json(playlist);
+})
+
+app.patch('/playlists/:id' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const id = req.params.id;
+  const nombre = req.body.nombre;
+  const link_portada = req.body.link_portada;
+  
+
+  if((await getPlaylistByID(id)) === undefined){
+    return res.status(404).send("No existe una playlist con ese id");
+  }
+
+  let playlist = {id}
+
+  if (nombre !== undefined){
+    const result = await updatePlaylistNombre(id, nombre);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    playlist.nombre = nombre;
+  }
+
+  if (link_portada !== undefined){
+    const result = await updatePlaylistPortada(id, link_portada);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    playlist.link_portada = link_portada;
+  }
+
+  if(playlist === undefined){
+    res.sendStatus(500);
+  }
+
+  res.json(playlist);
+
 })
 
 app.get('/usuarios/:id' , async (req, res) => {
@@ -192,18 +234,18 @@ app.patch('/usuarios/:id' , async (req, res) => {
   const carrera = req.body.carrera;
   const contraseña = req.body.contrasenia;
 
-  if((await getUsuariosByID())!== undefined){
+  if((await getUsuariosByID()) === undefined){
     return res.status(404).send("No existe usuario con ese id");
   }
 
-  if((await getUsuariosByName(nombre_usuario)) !== undefined){
+  if((await getUsuariosByName(nombre_usuario)) === undefined){
     return res.status(409).send("Ya hay un usuario con ese nombre");
   }
 
   let usuario = {id}
 
   if (nombre_usuario !== undefined){
-    const result = await updateUsuario_nombre(id, nombre_usuario);
+    const result = await updateUsuarioNombre(id, nombre_usuario);
     if(result === undefined){
       return res.sendStatus(500);
     }
@@ -211,7 +253,7 @@ app.patch('/usuarios/:id' , async (req, res) => {
   }
 
   if (carrera !== undefined){
-    const result = await updateUsuario_carrera(id, carrera);
+    const result = await updateUsuarioCarrera(id, carrera);
     if(result === undefined){
       return res.sendStatus(500);
     }
@@ -219,7 +261,7 @@ app.patch('/usuarios/:id' , async (req, res) => {
   }
 
   if (contraseña !== undefined){
-    const result = await updateUsuario_contraseña(id, contraseña);
+    const result = await updateUsuarioContraseña(id, contraseña);
     if(result === undefined){
       return res.sendStatus(500);
     }
