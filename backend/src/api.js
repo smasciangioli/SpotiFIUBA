@@ -91,6 +91,7 @@ app.post('/usuarios' , async (req, res) => {
   const nombre_usuario = req.body.nombre_usuario;
   const email = req.body.email;
   const carrera = req.body.carrera;
+  const contraseña = req.body.contrasenia;
 
   if((await getUsuariosByName(nombre_usuario))!== undefined){
     return res.status(409).send("Ya existe un usuario con ese nombre");
@@ -112,7 +113,11 @@ app.post('/usuarios' , async (req, res) => {
     return res.status(400).send("No se envio la carrera");
   }
 
-  const usuario = await createUsuario(nombre_usuario, email, carrera);
+  if(contraseña === undefined){
+    return res.status(400).send("No se envio la contraseña");
+  }
+
+  const usuario = await createUsuario(nombre_usuario, email, carrera, contraseña);
 
   if (usuario === undefined){
     res.sendStatus(500);
@@ -147,6 +152,10 @@ app.patch('/usuarios/:id' , async (req, res) => {
 
   if((await getUsuariosByID())!== undefined){
     return res.status(404).send("No existe usuario con ese id");
+  }
+
+  if((await getUsuariosByName(nombre_usuario)) !== undefined){
+    return res.status(409).send("Ya hay un usuario con ese nombre");
   }
 
   let usuario = {id}
