@@ -101,7 +101,7 @@ async function getUsuariosByEmail(email){
 async function createUsuario(nombre_usuario, email, carrera, contraseña) {
     try{
         const result = await pool.query(
-        "INSERT INTO usuarios (nombre_usuario, email, carrera, contraseña, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, CURRENT_DATE, CURRENT_DATE)",
+        "INSERT INTO usuarios (nombre_usuario, email, carrera, contrasenia, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, CURRENT_DATE, CURRENT_DATE)",
             [nombre_usuario, email, carrera, contraseña]
         );
 
