@@ -98,11 +98,11 @@ async function getUsuariosByEmail(email){
     return result.rows;
 }
 
-async function createUsuario(nombre_usuario, email, carrera) {
+async function createUsuario(nombre_usuario, email, carrera, contraseña) {
     try{
         const result = await pool.query(
-        "INSERT INTO usuarios (nombre_usuario, email, carrera, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, CURRENT_DATE, CURRENT_DATE)",
-            [nombre_usuario, email, carrera]
+        "INSERT INTO usuarios (nombre_usuario, email, carrera, contraseña, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, CURRENT_DATE, CURRENT_DATE)",
+            [nombre_usuario, email, carrera, contraseña]
         );
 
         if (result.rowCount === 0){
@@ -117,6 +117,7 @@ async function createUsuario(nombre_usuario, email, carrera) {
         nombre_usuario,
         email,
         carrera,
+        contraseña,
     }
 }
 
@@ -172,6 +173,27 @@ async function updateUsuario_carrera(id, carrera){
 
 }
 
+async function updateUsuario_contraseña(id, contraseña){
+    try {
+        const result = await pool.query(
+            "UPDATE usuarios SET contrasenia = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, contraseña]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            contraseña,
+        };
+
+    } catch {
+        return undefined;
+    }
+
+}
+
 
 module.exports = {
     getAllCanciones,
@@ -185,4 +207,5 @@ module.exports = {
     removeUsuario,
     updateUsuario_nombre,
     updateUsuario_carrera,
+    updateUsuario_contraseña,
 };

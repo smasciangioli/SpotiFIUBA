@@ -14,6 +14,7 @@ const {
   removeUsuario,
   updateUsuario_nombre,
   updateUsuario_carrera,
+  updateUsuario_contraseña,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -142,31 +143,43 @@ app.patch('/usuarios/:id' , async (req, res) => {
   const id = req.params.id;
   const nombre_usuario = req.body.nombre_usuario;
   const carrera = req.body.carrera;
+  const contraseña = req.body.contrasenia;
 
   if((await getUsuariosByID())!== undefined){
     return res.status(404).send("No existe usuario con ese id");
   }
 
-  let usuario;
+  let usuario = {id}
 
-  if (nombre_usuario !== undefined && carrera !== undefined){
-    usuario = await updateUsuario_nombre(id, nombre_usuario);
-    usuario = await updateUsuario_carrera(id, carrera);
+  if (nombre_usuario !== undefined){
+    const result = await updateUsuario_nombre(id, nombre_usuario);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    usuario.nombre_usuario = nombre_usuario;
   }
-    else if (nombre_usuario !== undefined){
-      usuario = await updateUsuario_nombre(id, nombre_usuario);
-    }
 
-    else if (carrera !== undefined){
-      usuario = await updateUsuario_carrera(id, carrera);
+  if (carrera !== undefined){
+    const result = await updateUsuario_carrera(id, carrera);
+    if(result === undefined){
+      return res.sendStatus(500);
     }
-  
+    usuario.carrera = carrera;
+  }
+
+  if (contraseña !== undefined){
+    const result = await updateUsuario_contraseña(id, contraseña);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    usuario.contraseña = contraseña;
+  }
 
   if(usuario === undefined){
     res.sendStatus(500);
   }
 
-  res.json(usuario)
+  res.json(usuario);
 
 })
 
