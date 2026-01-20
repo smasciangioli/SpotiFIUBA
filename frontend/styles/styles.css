@@ -74,7 +74,7 @@ header {
     transform: translateY(1px)
 }
 
-.boton-crear-usuario {
+#boton-crear-usuario {
     margin-right: 10px;
 }
 
@@ -218,7 +218,7 @@ header {
     pointer-events: none;
 }
 
-.boton-crear-usuario .tooltip {
+#boton-crear-usuario .tooltip {
     position: absolute;
     top: 70px;
     right: 0px;
@@ -242,7 +242,7 @@ header {
     transition: opacity 0.2s ease;
 }
 
-.boton-iniciar-sesion .tooltip {
+#boton-iniciar-sesion .tooltip {
     position: absolute;
     top: 70px;
     right: 125px;
@@ -266,12 +266,23 @@ header {
     transition: opacity 0.2s ease;
 }
 
-.boton-header:hover .tooltip {
+#boton-iniciar-sesion:hover .tooltip {
     opacity: 1;
     visibility: visible;
 }
 
-.boton-header:active .tooltip {
+#boton-iniciar-sesion:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#boton-crear-usuario:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#boton-crear-usuario:active .tooltip {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
