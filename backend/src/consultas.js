@@ -80,6 +80,16 @@ async function createPlaylist(nombre, creador_id, link_portada){
     }
 }
 
+async function removePlaylist(id){
+    try{
+        const result = await pool.query("DELETE FROM playlists WHERE id = $1", [id]);
+        return (result.rowCount === 1);
+
+    } catch {
+        return false;
+    }
+}
+
 async function getUsuariosByID(id){
     const result = await pool.query(
         `SELECT * FROM usuarios
@@ -222,6 +232,7 @@ module.exports = {
     getAllPlaylists,
     getPlaylistByID,
     createPlaylist,
+    removePlaylist,
     getUsuariosByID,
     getUsuariosByName,
     getUsuariosByEmail,

@@ -8,6 +8,7 @@ const {
   getAllPlaylists,
   getPlaylistByID,
   createPlaylist,
+  removePlaylist,
   getUsuariosByID,
   getUsuariosByName,
   getUsuariosByEmail,
@@ -78,6 +79,20 @@ app.post('/playlists' , async (req, res) => {
   }
 
   res.status(201).json(playlist);
+})
+
+app.delete('/playlists/:id' , async (req, res) => {
+  const playlist = await getPlaylistByID(req.params.id);
+  
+  if(playlist === undefined){
+    return res.sendStatus(404);
+  }
+
+  if(!(await removePlaylist(req.params.id))){
+    return res.sendStatus(500);
+  }
+
+  res.json(playlist);
 })
 
 app.get('/usuarios/:id' , async (req, res) => {
