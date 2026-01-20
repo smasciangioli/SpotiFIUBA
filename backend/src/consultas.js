@@ -74,6 +74,16 @@ async function createCancion(nombre, duracion, artista, usuario_id, link_portada
     }
 }
 
+async function removeCancion(id){
+    try{
+        const result = await pool.query("DELETE FROM canciones WHERE id = $1", [id]);
+        return (result.rowCount === 1);
+
+    } catch {
+        return false;
+    }
+}
+
 async function getAllPlaylists(){
     const result = await pool.query (
         `SELECT p.*, u.nombre_usuario
@@ -313,6 +323,7 @@ module.exports = {
     getCancionByName,
     getCancionByID,
     createCancion,
+    removeCancion,
     getAllPlaylists,
     getPlaylistByID,
     createPlaylist,

@@ -7,6 +7,7 @@ const {
   getCancionByName,
   getCancionByID,
   createCancion,
+  removeCancion,
   getAllPlaylists,
   getPlaylistByID,
   createPlaylist,
@@ -82,6 +83,20 @@ app.post('/canciones' , async (req, res) => {
   }
 
   res.status(201).json(cancion);
+})
+
+app.delete('/canciones/:id' , async (req, res) => {
+  const cancion = await getCancionByID(req.params.id);
+
+  if(cancion === undefined){
+    res.sendStatus(404);
+  }
+
+  if(!(await removeCancion(req.params.id))){
+    return res.sendStatus(500);
+  }
+
+  res.json(cancion);
 })
 
 app.get('/playlists' , async (req, res) => {
