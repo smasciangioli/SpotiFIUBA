@@ -24,6 +24,7 @@ const {
   updateUsuarioContraseña,
   updatePlaylistPortada,
   updatePlaylistNombre,
+  addCancionPlaylist,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -373,6 +374,32 @@ app.patch('/usuarios/:id' , async (req, res) => {
 
   res.json(usuario);
 
+})
+
+//Endpoint para agregar a una cancion a una playlist, en el body hay que mandar la cancion que se quiere agregar
+app.post('/playlists/:id/canciones' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const playlist_id = req.params.id;
+  const cancion_id = req.body.cancion_id;
+
+  if (await getPlaylistByID(playlist_id) === undefined){
+    res.status(404).send("La playlist no existe");
+  }
+
+  if (await getCancionByID(cancion_id) === undefined){
+    res.status(404).send("La cancion no existe");
+  }
+
+  const resultado = await addCancionPlaylist(playlist_id, cancion_id);
+
+  if(resultado === undefined){
+    return res.sendStatus(500);
+  }
+
+  res.status(201).json(resultado);
 })
 
 app.listen(port, () => {

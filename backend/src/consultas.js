@@ -357,6 +357,26 @@ async function updateUsuarioContraseña(id, contraseña){
 
 }
 
+async function addCancionPlaylist(playlist_id, cancion_id){
+    try {
+        const result = await pool.query(
+            "INSERT INTO playlist_canciones (playlist_id, cancion_id) VALUES ($1, $2)",
+            [playlist_id, cancion_id]
+        );
+
+        if (result.rowCount === 0){
+            return undefined;
+        }
+    } catch{
+        return undefined;
+    }
+
+    return{
+        playlist_id,
+        cancion_id,
+    }
+}
+
 
 module.exports = {
     getAllCanciones,
@@ -380,4 +400,5 @@ module.exports = {
     updateUsuarioNombre,
     updateUsuarioCarrera,
     updateUsuarioContraseña,
+    addCancionPlaylist,
 };
