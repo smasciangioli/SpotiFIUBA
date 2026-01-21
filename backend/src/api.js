@@ -8,6 +8,8 @@ const {
   getCancionByID,
   createCancion,
   removeCancion,
+  updateCancionNombre,
+  updateCancionPortada,
   getAllPlaylists,
   getPlaylistByID,
   createPlaylist,
@@ -94,6 +96,45 @@ app.delete('/canciones/:id' , async (req, res) => {
 
   if(!(await removeCancion(req.params.id))){
     return res.sendStatus(500);
+  }
+
+  res.json(cancion);
+})
+
+app.patch('/canciones/:id' , async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No se envio el body");
+  }
+
+  const id = req.params.id;
+  const nombre = req.body.nombre;
+  const link_portada = req.body.link_portada;
+  
+
+  if((await getCancionByID(id)) === undefined){
+    return res.status(404).send("No existe una cancion con ese id");
+  }
+
+  let cancion = {id}
+
+  if (nombre !== undefined){
+    const result = await updateCancionNombre(id, nombre);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    cancion.nombre = nombre;
+  }
+
+  if (link_portada !== undefined){
+    const result = await updateCancionPortada(id, link_portada);
+    if(result === undefined){
+      return res.sendStatus(500);
+    }
+    cancion.link_portada = link_portada;
+  }
+
+  if(cancion === undefined){
+    res.sendStatus(500);
   }
 
   res.json(cancion);

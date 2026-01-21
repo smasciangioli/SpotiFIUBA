@@ -84,6 +84,46 @@ async function removeCancion(id){
     }
 }
 
+async function updateCancionNombre(id, nuevo_nombre){
+    try {
+        const result = await pool.query(
+            "UPDATE canciones SET nombre = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nuevo_nombre]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nuevo_nombre,
+        };
+
+    } catch {
+        return undefined;
+    }
+}
+
+async function updateCancionPortada(id, nueva_portada){
+    try {
+        const result = await pool.query(
+            "UPDATE canciones SET link_portada = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nueva_portada]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nueva_portada,
+        };
+
+    } catch {
+        return undefined;
+    }
+}
+
 async function getAllPlaylists(){
     const result = await pool.query (
         `SELECT p.*, u.nombre_usuario
@@ -324,6 +364,8 @@ module.exports = {
     getCancionByID,
     createCancion,
     removeCancion,
+    updateCancionNombre,
+    updateCancionPortada,
     getAllPlaylists,
     getPlaylistByID,
     createPlaylist,
