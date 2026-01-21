@@ -377,6 +377,37 @@ async function addCancionPlaylist(playlist_id, cancion_id){
     }
 }
 
+async function getCancionFromPlaylist(playlist_id, cancion_id){
+    try{
+        const result = await pool.query(
+            "SELECT * FROM playlist_canciones WHERE playlist_id = $1 AND cancion_id = $2",
+            [playlist_id, cancion_id]
+        );
+
+        if(result.rowCount.length === 0){
+            return undefined;
+        }
+
+        return result.rows;
+    } catch{
+        return undefined;
+    }
+}
+
+async function removeCancionFromPlaylist(playlist_id, cancion_id){
+    try{
+        const result = await pool.query(
+            "DELETE FROM playlist_canciones WHERE playlist_id = $1 AND cancion_id = $2",
+            [playlist_id, cancion_id]
+        );
+
+        return (result.rowCount === 1);
+
+    } catch{
+        return false;
+    }
+}
+
 
 module.exports = {
     getAllCanciones,
@@ -401,4 +432,6 @@ module.exports = {
     updateUsuarioCarrera,
     updateUsuarioContraseña,
     addCancionPlaylist,
+    getCancionFromPlaylist,
+    removeCancionFromPlaylist,
 };

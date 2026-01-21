@@ -25,6 +25,8 @@ const {
   updatePlaylistPortada,
   updatePlaylistNombre,
   addCancionPlaylist,
+  getCancionFromPlaylist,
+  removeCancionFromPlaylist,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -376,14 +378,10 @@ app.patch('/usuarios/:id' , async (req, res) => {
 
 })
 
-//Endpoint para agregar a una cancion a una playlist, en el body hay que mandar la cancion que se quiere agregar
-app.post('/playlists/:id/canciones' , async (req, res) => {
-  if (req.body === undefined) {
-    return res.status(400).send("No se envio el body");
-  }
 
-  const playlist_id = req.params.id;
-  const cancion_id = req.body.cancion_id;
+app.post('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
+  const playlist_id = req.params.playlist_id;
+  const cancion_id = req.params.cancion_id;
 
   if (await getPlaylistByID(playlist_id) === undefined){
     res.status(404).send("La playlist no existe");
@@ -400,6 +398,24 @@ app.post('/playlists/:id/canciones' , async (req, res) => {
   }
 
   res.status(201).json(resultado);
+})
+
+
+app.delete('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
+  const playlist_id = req.params.playlist_id;
+  const cancion_id = req.params.cancion_id;
+
+  const resultado = await getCancionFromPlaylist(playlist_id, cancion_id);
+
+  if (resultado === undefined){
+    return res.status(404).send("Esa cancion no esta en esa playlist");
+  }
+
+  if ((!removeCancionFromPlaylist(playlist_id,cancion_id))){
+    res.sendStatus(500);
+  }
+
+  res.json(resultado);
 })
 
 app.listen(port, () => {
