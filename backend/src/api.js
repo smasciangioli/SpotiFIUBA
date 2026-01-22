@@ -27,6 +27,7 @@ const {
   addCancionPlaylist,
   getCancionFromPlaylist,
   removeCancionFromPlaylist,
+  getAllCancionesFromPlaylist,
 } = require('./consultas.js')
 
 app.use(express.json())
@@ -416,6 +417,20 @@ app.delete('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
   }
 
   res.json(resultado);
+})
+
+app.get('/playlists/:playlist_id/canciones' , async (req, res) => {
+  if((await getPlaylistByID(req.params.playlist_id) === undefined)){
+    res.sendStatus(500);
+  }
+
+  const canciones = await getAllCancionesFromPlaylist(req.params.playlist_id);
+
+  if (canciones === undefined){
+    res.sendStatus(500);
+  }
+
+  res.json(canciones);
 })
 
 app.listen(port, () => {

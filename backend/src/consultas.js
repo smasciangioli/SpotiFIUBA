@@ -408,6 +408,26 @@ async function removeCancionFromPlaylist(playlist_id, cancion_id){
     }
 }
 
+async function getAllCancionesFromPlaylist(playlist_id){
+    try{
+        const result = await pool.query(
+            `SELECT c.*
+            FROM canciones c
+            JOIN playlist_canciones pc ON c.id = pc.cancion_id
+            WHERE pc.playlist_id = $1`,
+            [playlist_id]
+        );
+
+        if(result.rowCount.length === 0){
+            return undefined;
+        }
+
+        return result.rows;
+    } catch{
+        return undefined;
+    }
+}
+
 
 module.exports = {
     getAllCanciones,
@@ -434,4 +454,5 @@ module.exports = {
     addCancionPlaylist,
     getCancionFromPlaylist,
     removeCancionFromPlaylist,
+    getAllCancionesFromPlaylist,
 };
