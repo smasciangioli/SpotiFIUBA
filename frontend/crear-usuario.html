@@ -12,7 +12,7 @@
         </div>
         </header>
         <div class="input-login">
-            <form>
+            <form id ="form-registro">
                 <div class="barra-input">
                     <label for="nombre_usuario">Nombre de Usuario:</label>
                     <input type="text" id="nombre_usuario" name="nombre_usuario">
@@ -50,6 +50,56 @@
             <div class="link-registro" onclick="window.location.href='iniciar-sesion.html'">
                     <p>¿Ya tenés una cuenta? Hacé click para ir a iniciar tu sesión.</p>
             </div>
-        <div>
+                
+            <script>
+                const form = document.getElementById("form-registro");
+                
+                form.addEventListener("submit", async function(e) {
+                 
+                
+                    const nombre_usuario = document.getElementById("nombre_usuario").value;
+                    const email = document.getElementById("email").value;
+                    const carrera = document.getElementById("carrera").value;
+                    const contrasenia = document.getElementById("contraseña").value;
+            
+                    try {
+                        const respuesta = await fetch("http://localhost:3000/usuarios", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                nombre_usuario,
+                                email,
+                                carrera,
+                                contrasenia
+                            })
+                        });
+                
+                        if (!respuesta.ok) {
+                            const error = await respuesta.text();
+                            throw new Error(error);
+                        }
+                
+                        window.location.href = "iniciar-sesion.html";
+                
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                });
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </script>
+        
     </body>
 </html>
