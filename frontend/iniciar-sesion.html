@@ -12,7 +12,7 @@
         </div>
         </header>
         <div class="input-login">
-            <form>
+            <form id="form-registro">
                 <div class="barra-input">
                     <label for="nombre_usuario">Nombre de Usuario:</label>
                     <input type="text" id="nombre_usuario" name="nombre_usuario">
@@ -32,6 +32,47 @@
             <div class="link-registro" onclick="window.location.href='crear-usuario.html'">
                     <p>¿No tenés una cuenta? Hacé click para ir a crear tu usuario.</p>
             </div>
-        <div>
+        <script>   
+            const form = document.getElementById("form-registro");
+
+            
+            form.addEventListener("submit", async function(e)){
+            const nombre =document.getElementById("nombre-usuario").value;
+            const email =document.getElement.ById("email").value;
+            const carrera= document.getElement.by.Id("carrera").value;
+            const contrasenia= document.getElement.By.Id("contraseña").value;
+          
+                try{
+                    const respuesta=await fetch("http://localhost:3000/usuarios, {
+                        method: "POST",
+                        headers:{ "Content-Type": "application/json"
+                                },
+                    body: JSON.stringify({
+                        nombre-usuario,
+                        email,
+                        carrera,
+                        contrasenia,
+                        )};
+                    )};
+                  if(!response.ok){
+                      const error = await response.text();
+                      throw New Error(error);
+                  }
+                  window.location.href = "iniciar-sesion-html";
+            } catch(error){
+                alert("algo salio mal");
+            }
+            });
+        </script>
+            
+            
+              
+            
+
+
+
+
+               
+        
     </body>
 </html>
