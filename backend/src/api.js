@@ -50,6 +50,7 @@ app.get('/canciones/:nombre' , async (req, res) => {
   res.json(canciones);
 })
 
+//Crea una nueva cancion
 app.post('/canciones' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -91,6 +92,7 @@ app.post('/canciones' , async (req, res) => {
   res.status(201).json(cancion);
 })
 
+//Borra una cancion de la base de datos
 app.delete('/canciones/:id' , async (req, res) => {
   const cancion = await getCancionByID(req.params.id);
 
@@ -105,6 +107,7 @@ app.delete('/canciones/:id' , async (req, res) => {
   res.json(cancion);
 })
 
+//Cambia el nombre, la portada de una cancion o las dos, esta dos deben ser enviadas en el body
 app.patch('/canciones/:id' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -144,12 +147,14 @@ app.patch('/canciones/:id' , async (req, res) => {
   res.json(cancion);
 })
 
+//Consigue todas las playlist
 app.get('/playlists' , async (req, res) => {
   const playlists = await getAllPlaylists();
 
   res.json(playlists);
 })
 
+//Consigue una playlist por su id
 app.get('/playlists/:id' , async (req, res) => {
   const playlists = await getPlaylistByID(req.params.id);
 
@@ -160,6 +165,7 @@ app.get('/playlists/:id' , async (req, res) => {
   res.json(playlists);
 })
 
+//Crea una nueva playlist
 app.post('/playlists' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -186,6 +192,7 @@ app.post('/playlists' , async (req, res) => {
   res.status(201).json(playlist);
 })
 
+//Borra una playlist por su id
 app.delete('/playlists/:id' , async (req, res) => {
   const playlist = await getPlaylistByID(req.params.id);
   
@@ -200,6 +207,7 @@ app.delete('/playlists/:id' , async (req, res) => {
   res.json(playlist);
 })
 
+//Cambia el nombre, la portada de una playlist o las dos, esta dos deben ser enviadas en el body
 app.patch('/playlists/:id' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -240,6 +248,7 @@ app.patch('/playlists/:id' , async (req, res) => {
 
 })
 
+//Consigue un usuario por su id
 app.get('/usuarios/:id' , async (req, res) => {
   const usuario = await getUsuariosByID(req.params.id);
   
@@ -250,6 +259,7 @@ app.get('/usuarios/:id' , async (req, res) => {
   res.json(usuario);
 })
 
+//Consigue un usuario por su nombre
 app.get('/usuarios_nombre/:nombre' , async (req, res) => {
   const usuario = await getUsuariosByName(req.params.nombre);
   
@@ -260,6 +270,7 @@ app.get('/usuarios_nombre/:nombre' , async (req, res) => {
   res.json(usuario);
 })
 
+//Consigue un usuario por su email
 app.get('/usuarios_email/:email' , async (req, res) => {
   const usuario = await getUsuariosByEmail(req.params.email);
   
@@ -270,6 +281,7 @@ app.get('/usuarios_email/:email' , async (req, res) => {
   res.json(usuario);
 })
 
+//Crea un nuevo usuario
 app.post('/usuarios' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -313,6 +325,7 @@ app.post('/usuarios' , async (req, res) => {
   res.status(201).json(usuario);
 })
 
+//Borra un usuario
 app.delete('/usuarios/:id' , async (req, res) => {
   const usuario = await getUsuariosByID(req.params.id);
   
@@ -327,6 +340,7 @@ app.delete('/usuarios/:id' , async (req, res) => {
   res.json(usuario);
 })
 
+//Cambia nombre, carrera, contraseña o las 3 de un usuario, estos campos deben ser enviados en el body
 app.patch('/usuarios/:id' , async (req, res) => {
   if (req.body === undefined) {
     return res.status(400).send("No se envio el body");
@@ -379,7 +393,7 @@ app.patch('/usuarios/:id' , async (req, res) => {
 
 })
 
-
+//Añade una cancion a una playlist
 app.post('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
   const playlist_id = req.params.playlist_id;
   const cancion_id = req.params.cancion_id;
@@ -401,7 +415,7 @@ app.post('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
   res.status(201).json(resultado);
 })
 
-
+//Borra una cancion de una playlist
 app.delete('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
   const playlist_id = req.params.playlist_id;
   const cancion_id = req.params.cancion_id;
@@ -419,6 +433,7 @@ app.delete('/playlists/:playlist_id/cancion/:cancion_id' , async (req, res) => {
   res.json(resultado);
 })
 
+//Consigue todas las canciones de una playlist
 app.get('/playlists/:playlist_id/canciones' , async (req, res) => {
   if((await getPlaylistByID(req.params.playlist_id) === undefined)){
     res.sendStatus(500);
