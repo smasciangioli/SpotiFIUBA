@@ -302,3 +302,12 @@ header {
     background-color: #1c9fdb;
     margin-top: -10px;
 }
+
+#nombre-perfil {
+    margin-top: 100px;
+    color: white;
+    font-size: 50px;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: center;
+}
