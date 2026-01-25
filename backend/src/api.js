@@ -3,6 +3,18 @@ const app = express()
 const port = 3000
 
 const {
+    getUsuariosByID,
+    getUsuariosByName,
+    getUsuariosByEmail,
+    createUsuario,
+    removeUsuario,
+    updateUsuarioNombre,
+    updateUsuarioCarrera,
+    updateUsuarioContraseña,
+} = require('./funciones/usuarios.js')
+
+
+const {
   getAllCanciones,
   getCancionByName,
   getCancionByID,
@@ -10,25 +22,20 @@ const {
   removeCancion,
   updateCancionNombre,
   updateCancionPortada,
+} = require('./funciones/canciones.js')
+
+const {
   getAllPlaylists,
   getPlaylistByID,
   createPlaylist,
   removePlaylist,
-  getUsuariosByID,
-  getUsuariosByName,
-  getUsuariosByEmail,
-  createUsuario,
-  removeUsuario,
-  updateUsuarioNombre,
-  updateUsuarioCarrera,
-  updateUsuarioContraseña,
-  updatePlaylistPortada,
   updatePlaylistNombre,
+  updatePlaylistPortada,
   addCancionPlaylist,
   getCancionFromPlaylist,
   removeCancionFromPlaylist,
   getAllCancionesFromPlaylist,
-} = require('./consultas.js')
+} = require('./funciones/playlists.js')
 
 app.use(express.json())
 
