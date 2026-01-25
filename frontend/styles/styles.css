@@ -1,0 +1,313 @@
+body {
+    margin: 0;
+    background-color: #121212;
+    height: 200vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    background-color: #1c9fdb;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 10;
+    margin-bottom: 0;
+    justify-content: space-between;
+}
+
+.logo-spotifiuba {
+    cursor: pointer;
+}
+
+.negro {
+    color: #121212;
+}
+
+.blanco {
+    color: white;
+}
+
+.azul {
+    color: #1c9fdb;
+}
+
+.saludo {
+    margin-top: 0;
+    color: white;
+    font-size: 25px;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.separador {
+    border: none;
+    height: 2px;
+    background-color: #1c9fdb;
+    width: 25%;
+    margin-top: -5px;
+}
+
+.botones-header {
+
+    display: flex;
+    gap: 10px;
+    
+}
+
+.boton-header {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #1c9fdb;
+    background-color: #121212;
+}
+
+.boton-header:active {
+    background-color: #1f1f22;
+    transform: translateY(1px)
+}
+
+#boton-crear-usuario {
+    margin-right: 10px;
+}
+
+.input-login {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barra-input input {
+    background-color: #1f1f22;
+    border: none;
+    border-bottom: 2px solid #1c9fdb;
+    padding: 10px 5px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+}
+
+.barra-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 30px;
+}
+
+.barra-input label {
+    color: white;
+    padding-bottom: 5px;
+}
+
+.select-carreras {
+    background-color: #1f1f22;
+    border: none;
+    border-bottom: 2px solid #1c9fdb;
+    padding: 10px 5px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.link-registro {
+    color: #1c9fdb;
+    cursor: pointer;
+}
+
+#subir-musica {
+    position: fixed;
+    bottom: 60px;    
+    right: 60px;
+    color: white;
+    background-color: #1c9fdb;
+    border: hidden;
+    font-size: 80px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+    font-size:35px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#subir-musica:active {
+    background-color: #10b1fc;
+    transform: translateY(1px)
+}
+
+#subir-musica .tooltip {
+    position: absolute;
+    bottom: 70px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#subir-musica:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#subir-musica:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.logo-spotifiuba .tooltip {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.logo-spotifiuba:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-spotifiuba:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#boton-crear-usuario .tooltip {
+    position: absolute;
+    top: 70px;
+    right: 0px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#boton-iniciar-sesion .tooltip {
+    position: absolute;
+    top: 70px;
+    right: 125px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#boton-iniciar-sesion:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#boton-iniciar-sesion:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#boton-crear-usuario:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#boton-crear-usuario:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boton-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.boton-subir {
+    border-radius: 20px;
+    border: hidden;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    background-color: #1c9fdb;
+    margin-top: -10px;
+}
+
+#nombre-perfil {
+    margin-top: 100px;
+    color: white;
+    font-size: 50px;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: center;
+}
