@@ -1,14 +1,26 @@
 services:
-  postgres:
+  db:
     image: postgres:18
     ports:
       - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql
     environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=spotifiuba
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: spotifiuba
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_PORT: 5432
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: spotifiuba
 
 volumes:
   postgres_data:
