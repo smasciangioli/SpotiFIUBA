@@ -39,26 +39,19 @@ async function getUsuariosByEmail(email){
     return result.rows;
 }
 
-async function createUsuario(nombre_usuario, email, carrera, contraseña) {
+async function createUsuario(nombre_usuario, email, carrera, contrasenia) {
     try{
         const result = await pool.query(
-        "INSERT INTO usuarios (nombre_usuario, email, carrera, contrasenia, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, CURRENT_DATE, CURRENT_DATE)",
-            [nombre_usuario, email, carrera, contraseña]
-        );
+    `INSERT INTO usuarios (nombre_usuario, email, carrera, "contraseña", fecha_creacion, fecha_modificacion)
+     VALUES ($1, $2, $3, $4, CURRENT_DATE, CURRENT_DATE) RETURNING *`,
+    [nombre_usuario, email, carrera, contrasenia]
+);
 
-        if (result.rowCount === 0){
-            return undefined;
-        }
+        return result.rows[0];  
 
-    } catch{
+    } catch(err){
+        console.error("Error en createUsuario:", err);
         return undefined;
-    }
-
-    return{
-        nombre_usuario,
-        email,
-        carrera,
-        contraseña,
     }
 }
 
