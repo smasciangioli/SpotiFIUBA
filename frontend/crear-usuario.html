@@ -19,11 +19,11 @@
                 </div>
                 <div class="barra-input">
                     <label for="email">Correo Electrónico (email, gmail, etc):</label>
-                    <input type="text" id="email" name="email">
+                    <input type="email" id="email" name="email">
                 </div>
                 <div class="barra-input">
-                    <label for="contraseña">Contraseña:</label>
-                    <input type="password" id="contraseña" name="contraseña">
+                    <label for="contrasenia">contraseña:</label>
+                    <input type="password" id="contrasenia" name="contrasenia">
                 </div>
                 <div class="barra-input">
                     <label for="carrera">Carrera:</label>
@@ -54,51 +54,43 @@
             <script>
                 const form = document.getElementById("form-registro");
                 
-                form.addEventListener("submit", async function(e) {
-                 
                 
-                    const nombre_usuario = document.getElementById("nombre_usuario").value;
-                    const email = document.getElementById("email").value;
+                form.addEventListener("submit", async function(e) {
+                    e.preventDefault();
+                
+                    const nombre_usuario = document.getElementById("nombre_usuario").value.trim();
+                    const email = document.getElementById("email").value.trim();
                     const carrera = document.getElementById("carrera").value;
-                    const contrasenia = document.getElementById("contraseña").value;
-            
+                    const contrasenia = document.getElementById("contrasenia").value;
+                    if (!nombre_usuario || !email || !contrasenia) {
+                        alert("Completa todos los campos obligatorios");
+                        
+                        return;
+}
+                
+                    console.log("Registro enviado:", { nombre_usuario, email, carrera });
+                    
+                
                     try {
                         const respuesta = await fetch("http://localhost:3000/usuarios", {
                             method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                nombre_usuario,
-                                email,
-                                carrera,
-                                contrasenia
-                            })
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ nombre_usuario, email, carrera, contrasenia })
                         });
                 
+                        console.log("Respuesta POST /usuarios:", respuesta.status);
                         if (!respuesta.ok) {
-                            const error = await respuesta.text();
-                            throw new Error(error);
+                            const error = await respuesta.text().catch(()=>"");
+                            throw new Error(error || `status ${respuesta.status}`);
                         }
                 
                         window.location.href = "iniciar-sesion.html";
-                
-                    } catch (error) {
-                        alert(error.message);
-                    }
+                    } catch (fallo) {
+                        console.error(fallo);
+                        alert(err.message || "Error en la petición");
+                    } 
+                    
                 });
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             </script>
         
     </body>
