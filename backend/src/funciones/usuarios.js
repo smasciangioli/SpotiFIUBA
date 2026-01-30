@@ -107,10 +107,10 @@ async function updateUsuarioCarrera(id, carrera){
 
 }
 
-async function updateUsuarioContraseña(id, contraseña){
+async function updateUsuarioContrasenia(id, contrasenia){
     try {
         const result = await pool.query(
-            "UPDATE usuarios SET contrasenia = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, contraseña]
+            "UPDATE usuarios SET contrasenia = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, contrasenia]
         );
 
         if(result.rowCount === 0){
@@ -119,7 +119,7 @@ async function updateUsuarioContraseña(id, contraseña){
 
         return {
             id,
-            contraseña,
+            contrasenia,
         };
 
     } catch {
@@ -135,5 +135,5 @@ module.exports = {
     removeUsuario,
     updateUsuarioNombre,
     updateUsuarioCarrera,
-    updateUsuarioContraseña,
+    updateUsuarioContrasenia,
 }
