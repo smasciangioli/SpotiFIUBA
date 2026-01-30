@@ -339,7 +339,7 @@ app.post('/login', async (req, res) => {
     return res.status(401).send("Email o contraseña incorrectos");
   }
 
-
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
