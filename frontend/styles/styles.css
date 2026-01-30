@@ -311,3 +311,46 @@ header {
     font-weight: bold;
     text-align: center;
 }
+.barra-login {
+    position: fixed;
+    top: 60px; 
+    left: 0;
+
+    width: 260px;
+    height: calc(100vh - 60px);
+
+    background-color: #181818; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    z-index: 5;
+}
+
+.boton-barra {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+
+    background-color: #1c9fdb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.boton-barra:active {
+    background-color: #10b1fc;
+    transform: translateY(1px);
+}
+
+.no-logueado #boton-playlist {
+    display: none;
+}
+
+.logueado #boton-login {
+    display: none;
+}
