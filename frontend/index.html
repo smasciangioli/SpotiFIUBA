@@ -6,6 +6,21 @@
         <link rel="stylesheet" href="styles/styles.css">
     </head>
     <body>
+        <div class="barra-login no-logueado" id="barra-login">
+            <h2 class = "azul"> Playlists </h2>
+            <br>
+    
+
+            <button class="boton-barra" id="boton-login"
+                onclick="window.location.href='iniciar-sesion.html'">
+                Iniciar sesión
+            </button>
+
+            <button class="boton-barra" id="boton-playlist"
+                onclick="window.location.href='playlist.html'">
+                Agregar playlist
+            </button>
+        </div>
         <header>
             <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
                 <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
@@ -22,5 +37,35 @@
         <div id="boton-musica">
             <button id="subir-musica" onclick="window.location.href='new-music.html'"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
         </div>
+        <script>
+            
+                    const barra = document.getElementById("barra-login");
+                    const token = localStorage.getItem("token");
+        
+                    if (token) {
+                        barra.classList.add("logueado");
+                     barra.classList.remove("no-logueado");
+                    } else {
+                    barra.classList.add("no-logueado");
+                    barra.classList.remove("logueado");
+                    }
+           
+                const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+                const botonLogin = document.getElementById("boton-login");
+                const botonPlaylist = document.getElementById("boton-playlist");
+                const texto = document.getElementById("texto-sesion");
+
+                if (usuario) {
+                    botonLogin.style.display = "none";
+                    botonPlaylist.style.display = "block";
+                    
+                } else {
+                    botonLogin.style.display = "block";
+                    botonPlaylist.style.display = "none";
+                    
+                }
+        </script>
+        
     </body>
 </html>
