@@ -320,6 +320,24 @@ app.get('/playlists/:playlist_id/canciones', async (req, res) => {
 
   res.json(canciones);
 })
+app.post('/login', async (req, res) => {
+  const { email, contrasenia } = req.body;
+
+  if (!email || !contrasenia) {
+    return res.status(400).send("Faltan datos");
+  }
+
+  const usuarios = await getUsuariosByEmail(email);
+
+  if (!usuarios) {
+    return res.status(401).send("Email o contraseña incorrectos");
+  }
+
+  const usuario = usuarios[0];
+
+  if (usuario.contraseña !== contrasenia) {
+    return res.status(401).send("Email o contraseña incorrectos");
+  }
 
 
 app.listen(port, () => {
