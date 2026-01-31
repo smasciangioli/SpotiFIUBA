@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: spotifiuba
   backend:
-    build: .
+    build: ./backend
     ports:
       - "3000:3000"
     depends_on:
@@ -22,6 +22,12 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: spotifiuba
+  frontend:
+    image: nginx:stable
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
 
 volumes:
   postgres_data:
