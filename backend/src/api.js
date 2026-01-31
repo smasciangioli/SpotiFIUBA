@@ -321,25 +321,39 @@ app.get('/playlists/:playlist_id/canciones', async (req, res) => {
   res.json(canciones);
 })
 app.post('/login', async (req, res) => {
-  const { email, contrasenia } = req.body;
+  try {
+    const { email, contrasenia } = req.body;
 
-  if (!email || !contrasenia) {
-    return res.status(400).send("Faltan datos");
+    if (!email || !contrasenia) {
+      return res.status(400).send("Faltan datos");
+    }
+
+    const usuarios = await getUsuariosByEmail(email);
+
+    if (!usuarios || usuarios.length === 0) {
+      return res.status(401).send("Email o contraseña incorrectos");
+      return res.send(usuario);
+    }
+
+    const usuario = usuarios[0];
+
+    if (usuario.contrasenia !== contrasenia) {
+      return res.status(401).send("Email o contraseña incorrectos");
+    }
+
+    return res.status(200).json({
+      id: usuario.id,
+      nombre: usuario.nombre_usuario,
+      email: usuario.email
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error interno del servidor");
   }
+});
 
-  const usuarios = await getUsuariosByEmail(email);
 
-  if (!usuarios) {
-    return res.status(401).send("Email o contraseña incorrectos");
-  }
-
-  const usuario = usuarios[0];
-
-  if (usuario.contraseña !== contrasenia) {
-    return res.status(401).send("Email o contraseña incorrectos");
-  }
-
-})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
