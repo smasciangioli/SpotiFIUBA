@@ -343,7 +343,8 @@ app.post('/login', async (req, res) => {
     return res.status(200).json({
       id: usuario.id,
       nombre: usuario.nombre_usuario,
-      email: usuario.email
+      email: usuario.email,
+      carrera: usuario.carrera,
     });
 
   } catch (error) {
