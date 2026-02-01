@@ -16,7 +16,14 @@
                 Hola (nombre)
             </h1>
             <hr class = "separador"> 
-            <p class="perfil-email"> Email: (mail)</p>
+            <p class="perfil-email">
+                Email: <span id="email-perfil"></span>
+                
+                </p>
+                <p class="perfil-email">
+                Carrera: <span id = "carrera-perfil"></span>
+                </p>
+
             <div class = "botones-acciones">
                 <a href = "new-music.html" class = "boton-subir"> Subir Cancion </a>
                  <a href = "playlist.html" class="boton-subir"> Nueva Playlist</a>
@@ -31,20 +38,37 @@
             </ul>
             
        </div>     
+        
         <div>
+        
             <p id="logout">Cerrar Sesion</p>
         </div>
-        </div>
+    </div>
+          
+
         <script>
-            const botonLogout = document.getElementById("logout")
-            botonLogout.addEventListener("click", () =>{
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+                if (!usuario) {
+                window.location.href = "iniciar-sesion.html";
+                }
+
+                document.getElementById("nombre-perfil").textContent =
+                `Hola ${usuario.nombre}`;
+
+                document.getElementById("email-perfil").textContent =
+                usuario.email;
+                document.getElementById("carrera-perfil").textContent = usuario.carrera;
+                const botonLogout = document.getElementById("logout")
+                 botonLogout.addEventListener("click", () =>{
                 if(confirm("¿Estás seguro que querés cerrar sesion?")) {
-                    localStorage.removeItem("usuario");
-                    window.location.href = "index.html";
+                 localStorage.removeItem("usuario");
+                  window.location.href = "index.html";
                 } 
             });
-        </script>
+            </script>
     </body>
 </html>
+    
         
     
