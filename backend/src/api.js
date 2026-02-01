@@ -5,39 +5,39 @@ const port = 3000
 app.use(cors());
 app.use(express.json())
 
-const {
-  getUsuariosByID,
-  getUsuariosByName,
-  getUsuariosByEmail,
-  createUsuario,
-  removeUsuario,
-  updateUsuarioNombre,
-  updateUsuarioCarrera,
-  updateUsuariocontrasenia,
-} = require('./funciones/usuarios.js')
+   const {
+     getUsuariosByID,
+     getUsuariosByName,
+     getUsuariosByEmail,
+     createUsuario,
+     removeUsuario,
+     updateUsuarioNombre,
+     updateUsuarioCarrera,
+     updateUsuarioContrasenia,
+   } = require('./funciones/usuarios.js')
 
-const {
-  getAllCanciones,
-  getCancionByName,
-  getCancionByID,
-  createCancion,
-  removeCancion,
-  updateCancionNombre,
-  updateCancionPortada,
-} = require('./funciones/canciones.js')
+   const {
+     getAllCanciones,
+     getCancionByName,
+     getCancionByID,
+     createCancion,
+     removeCancion,
+     updateCancionNombre,
+     updateCancionPortada,
+   } = require('./funciones/canciones.js')
 
-const {
-  getAllPlaylists,
-  getPlaylistByID,
-  createPlaylist,
-  removePlaylist,
-  updatePlaylistNombre,
-  updatePlaylistPortada,
-  addCancionPlaylist,
-  getCancionFromPlaylist,
-  removeCancionFromPlaylist,
-  getAllCancionesFromPlaylist,
-} = require('./funciones/playlists.js')
+   const {
+     getAllPlaylists,
+     getPlaylistByID,
+     createPlaylist,
+     removePlaylist,
+     updatePlaylistNombre,
+     updatePlaylistPortada,
+     addCancionPlaylist,
+     getCancionFromPlaylist,
+     removeCancionFromPlaylist,
+     getAllCancionesFromPlaylist,
+   } = require('./funciones/playlists.js')
 
 
 
@@ -268,7 +268,7 @@ app.patch('/usuarios/:id', async (req, res) => {
   }
 
   if (contrasenia !== undefined) {
-    if (await updateUsuariocontrasenia(id, contrasenia) === undefined) {
+    if (await updateUsuarioContrasenia(id, contrasenia) === undefined) {
       return res.sendStatus(500);
     }
     usuario.contrasenia = contrasenia;
@@ -332,6 +332,7 @@ app.post('/login', async (req, res) => {
 
     if (!usuarios || usuarios.length === 0) {
       return res.status(401).send("Email o contraseña incorrectos");
+      return res.send(usuario);
     }
 
     const usuario = usuarios[0];
@@ -351,7 +352,6 @@ app.post('/login', async (req, res) => {
     return res.status(500).send("Error interno del servidor");
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
