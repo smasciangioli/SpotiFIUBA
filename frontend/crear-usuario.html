@@ -87,7 +87,7 @@
                         window.location.href = "iniciar-sesion.html";
                     } catch (fallo) {
                         console.error(fallo);
-                        alert(err.message || "Error en la petición");
+                        alert(fallo.message || "Error en la petición");
                     } 
                     
                 });

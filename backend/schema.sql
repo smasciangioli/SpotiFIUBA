@@ -3,7 +3,7 @@ CREATE TABLE usuarios (
     nombre_usuario VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     carrera VARCHAR(50),
-    contraseña VARCHAR (100) NOT NULL,
+    contrasenia VARCHAR (100) NOT NULL,
     fecha_creacion DATE NOT NULL,
     fecha_modificacion DATE NOT NULL 
 );

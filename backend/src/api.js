@@ -332,7 +332,6 @@ app.post('/login', async (req, res) => {
 
     if (!usuarios || usuarios.length === 0) {
       return res.status(401).send("Email o contraseña incorrectos");
-      return res.send(usuario);
     }
 
     const usuario = usuarios[0];
