@@ -28,6 +28,7 @@
             <div class="botones-header">
                 <button class="boton-header" id="boton-iniciar-sesion" onclick="window.location.href='iniciar-sesion.html'">Iniciar Sesión<span class="tooltip">Ir a Iniciar Sesión</span></button>
                 <button class="boton-header" id="boton-crear-usuario" onclick="window.location.href='crear-usuario.html'">Crear Usuario<span class="tooltip">Ir a Crear Usuario</span></button>
+                <button class="boton-header" id="boton-perfil" onclick="window.location.href='usuario.html'">Perfil</button>
             </div>
         </header>
         <div class="saludo">
@@ -44,15 +45,23 @@
 
             const botonLogin = document.getElementById("boton-login");
             const botonPlaylist = document.getElementById("boton-playlist");
-                
+            const botonPerfil = document.getElementById("boton-perfil");
+            const botonIniciarSesion = document.getElementById("boton-iniciar-sesion");
+            const botonCrearUsuario = document.getElementById("boton-crear-usuario");
+
             if (usuario) {
                 botonLogin.style.display = "none";
                 botonPlaylist.style.display = "block";
+                botonPerfil.style.display = "block";
+                botonIniciarSesion.style.display = "none";
+                botonCrearUsuario.style.display = "none";
                     
             } else {
                 botonLogin.style.display = "block";
                 botonPlaylist.style.display = "none";
-                    
+                botonPerfil.style.display = "none";
+                botonIniciarSesion.style.display = "block";
+                botonCrearUsuario.style.display = "block";
             }
         </script>
         

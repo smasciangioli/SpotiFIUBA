@@ -398,3 +398,8 @@ header {
 .cuadro-playlists li {
     padding: 5px 0;
 }
+
+#boton-perfil {
+    margin-right: 10px;
+    display: none;
+}
