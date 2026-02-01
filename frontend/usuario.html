@@ -31,8 +31,19 @@
             </ul>
             
        </div>     
-        
+        <div>
+            <p id="logout">Cerrar Sesion</p>
         </div>
+        </div>
+        <script>
+            const botonLogout = document.getElementById("logout")
+            botonLogout.addEventListener("click", () =>{
+                if(confirm("¿Estás seguro que querés cerrar sesion?")) {
+                    localStorage.removeItem("usuario");
+                    window.location.href = "index.html";
+                } 
+            });
+        </script>
     </body>
 </html>
         

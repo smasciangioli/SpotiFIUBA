@@ -403,3 +403,12 @@ header {
     margin-right: 10px;
     display: none;
 }
+
+#logout {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(221, 23, 23);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 10px;
+}
