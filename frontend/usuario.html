@@ -60,10 +60,10 @@
                 usuario.email;
                 document.getElementById("carrera-perfil").textContent = usuario.carrera;
                 const botonLogout = document.getElementById("logout")
-                 botonLogout.addEventListener("click", () =>{
+                botonLogout.addEventListener("click", () =>{
                 if(confirm("¿Estás seguro que querés cerrar sesion?")) {
-                 localStorage.removeItem("usuario");
-                  window.location.href = "index.html";
+                    localStorage.removeItem("usuario");
+                    window.location.href = "index.html";
                 } 
             });
             </script>

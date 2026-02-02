@@ -36,7 +36,7 @@
             <hr class="separador">
         </div>
         <div id="boton-musica">
-            <button id="subir-musica" onclick="window.location.href='new-music.html'"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
+            <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
         </div>
         <script>
             
@@ -48,6 +48,7 @@
             const botonPerfil = document.getElementById("boton-perfil");
             const botonIniciarSesion = document.getElementById("boton-iniciar-sesion");
             const botonCrearUsuario = document.getElementById("boton-crear-usuario");
+            const botonSubirMusica = document.getElementById("subir-musica");
 
             if (usuario) {
                 botonLogin.style.display = "none";
@@ -63,6 +64,15 @@
                 botonIniciarSesion.style.display = "block";
                 botonCrearUsuario.style.display = "block";
             }
+
+            botonSubirMusica.addEventListener("click", () => {
+                if(usuario) {
+                    window.location.href = "new-music.html";
+                } else {
+                    alert("Tenes que crear una cuenta o iniciar sesion.");
+                }
+                
+            })
         </script>
         
     </body>
