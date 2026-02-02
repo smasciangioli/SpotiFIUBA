@@ -11,7 +11,7 @@ CREATE TABLE usuarios (
 CREATE TABLE canciones (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    duracion DECIMAL(10,2) NOT NULL,
+    genero VARCHAR(100) NOT NULL,
     artista VARCHAR(100) NOT NULL,
     usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
     link_portada VARCHAR(400),
