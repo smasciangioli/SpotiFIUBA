@@ -40,30 +40,58 @@
         </div>
         <script>
             
-            const barra = document.getElementById("barra-login");
-            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            async function validarLogin() {
+                const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-            const botonLogin = document.getElementById("boton-login");
-            const botonPlaylist = document.getElementById("boton-playlist");
-            const botonPerfil = document.getElementById("boton-perfil");
-            const botonIniciarSesion = document.getElementById("boton-iniciar-sesion");
-            const botonCrearUsuario = document.getElementById("boton-crear-usuario");
-            const botonSubirMusica = document.getElementById("subir-musica");
+                if (!usuario) {
+                    actualizarPagina(null);
+                    return;
+                }
 
-            if (usuario) {
-                botonLogin.style.display = "none";
-                botonPlaylist.style.display = "block";
-                botonPerfil.style.display = "block";
-                botonIniciarSesion.style.display = "none";
-                botonCrearUsuario.style.display = "none";
-                    
-            } else {
-                botonLogin.style.display = "block";
-                botonPlaylist.style.display = "none";
-                botonPerfil.style.display = "none";
-                botonIniciarSesion.style.display = "block";
-                botonCrearUsuario.style.display = "block";
+                try {
+                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}`)
+
+                    if(!res.ok){
+                        localStorage.clear();
+                        actualizarPagina(null);
+                        return;
+                    }
+
+                    actualizarPagina(usuario);
+
+                } catch (fallo){
+                    console.error(fallo);
+                    localStorage.clear();
+                    actualizarPagina(null);
+                }
             }
+
+            function actualizarPagina(usuario){
+                const barra = document.getElementById("barra-login");
+                const botonLogin = document.getElementById("boton-login");
+                const botonPlaylist = document.getElementById("boton-playlist");
+                const botonPerfil = document.getElementById("boton-perfil");
+                const botonIniciarSesion = document.getElementById("boton-iniciar-sesion");
+                const botonCrearUsuario = document.getElementById("boton-crear-usuario");
+                const botonSubirMusica = document.getElementById("subir-musica");
+
+                if (usuario) {
+                    botonLogin.style.display = "none";
+                    botonPlaylist.style.display = "block";
+                    botonPerfil.style.display = "block";
+                    botonIniciarSesion.style.display = "none";
+                    botonCrearUsuario.style.display = "none";
+                        
+                } else {
+                    botonLogin.style.display = "block";
+                    botonPlaylist.style.display = "none";
+                    botonPerfil.style.display = "none";
+                    botonIniciarSesion.style.display = "block";
+                    botonCrearUsuario.style.display = "block";
+                }
+            }
+
+            validarLogin();
 
             botonSubirMusica.addEventListener("click", () => {
                 if(usuario) {
