@@ -40,12 +40,12 @@ async function getCancionByID(id){
     return result.rows;
 }
 
-async function createCancion(nombre, duracion, artista, usuario_id, link_portada, link_audio){
+async function createCancion(nombre, genero, artista, usuario_id, link_portada, link_audio){
     try{   
         const result = await pool.query(
-            `INSERT INTO canciones (nombre, duracion, artista, usuario_id, link_portada, link_audio, fecha_creacion, fecha_modificacion)
+            `INSERT INTO canciones (nombre, genero, artista, usuario_id, link_portada, link_audio, fecha_creacion, fecha_modificacion)
             VALUES ($1, $2, $3, $4, $5, $6, CURRENT_DATE, CURRENT_DATE)`,
-            [nombre, duracion, artista, usuario_id, link_portada, link_audio]
+            [nombre, genero, artista, usuario_id, link_portada, link_audio]
         );
 
         if(result.rowCount === 0){
@@ -57,7 +57,7 @@ async function createCancion(nombre, duracion, artista, usuario_id, link_portada
 
     return{
         nombre,
-        duracion,
+        genero,
         artista,
         usuario_id,
         link_portada,
