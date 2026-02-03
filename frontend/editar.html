@@ -53,6 +53,13 @@
     <div class="boton-wrapper">
         <button class="boton-subir" onclick="guardarCambios()">Guardar cambios</button>
     </div>
+    <hr>
+    <div class="boton-wrapper">
+    <button class="boton-subir" onclick="eliminarUsuario()">
+        Eliminar cuenta
+    </button>
+</div>
+
 </div>
 
 <script>
@@ -107,6 +114,28 @@ function logout() {
     localStorage.removeItem("usuario");
     window.location.href = "iniciar-sesion.html";
 }
+async function eliminarUsuario() {
+    const confirmar = confirm(
+        "¿Estás seguro? Esta acción eliminará tu cuenta y no se puede deshacer."
+    );
+
+    if (!confirmar) return;
+
+    const res = await fetch(
+        `http://localhost:3000/usuarios/${usuario.id}`,
+        { method: "DELETE" }
+    );
+
+    if (!res.ok) {
+        alert("Error al eliminar la cuenta");
+        return;
+    }
+
+    localStorage.removeItem("usuario");
+    alert("Cuenta eliminada correctamente");
+    window.location.href = "index.html";
+}
+
 </script>
 
 </body>
