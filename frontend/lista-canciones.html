@@ -55,7 +55,9 @@
                                 </div>
                             </div>
                         `;
-
+                        elemento.addEventListener("click", () =>
+                            window.location.href = `musica.html?id=${cancion.id}`
+                        )
                         contenedorCanciones.appendChild(elemento);
                     });
                 } 
