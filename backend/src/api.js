@@ -64,7 +64,6 @@ app.post('/canciones', async (req, res) => {
   if (artista === undefined) return res.status(400).send("No se envio el artista");
   if (usuario_id === undefined) return res.status(400).send("No se envio el usuario_id");
   if (link_audio === undefined) return res.status(400).send("No se envio el link del audio");
-  if (link_portada === undefined) return res.status(400).send("No se encio el link de la portada");
 
   const cancion = await createCancion(nombre, genero, artista, usuario_id, link_portada, link_audio);
   if (cancion === undefined) return res.sendStatus(500);
