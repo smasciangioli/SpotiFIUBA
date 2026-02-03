@@ -14,8 +14,26 @@
 
 
         <script>
-            const cancion_id = URLSearchParams("id");
-            console.log(cancion_id);
+            const URLParametros = new URLSearchParams(window.location.search);
+            const cancion_id = URLParametros.get("id");
+
+            if(!cancion_id) {
+                alert("Esa cancion no es valida.")
+                window.location.href = "lista-canciones.html";
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:3000/canciones/${cancion_id}`);
+
+                if(!res.ok) {
+                    alert("Esa cancion no existe.")
+                    window.location.href = "lista-canciones.html";
+                    return;
+                }
+
+                
+            }
         </script>
     </body>
 </html>
