@@ -4,7 +4,8 @@ async function getAllCanciones(){
     const result = await pool.query(
         `SELECT c.*, u.nombre_usuario
         FROM canciones c
-        JOIN usuarios u ON c.usuario_id=u.id`
+        JOIN usuarios u ON c.usuario_id=u.id
+        ORDER BY c.fecha_modificacion DESC, c.id DESC`
     );
 
     return result.rows;
@@ -38,6 +39,22 @@ async function getCancionByID(id){
     }
     
     return result.rows[0];
+}
+
+async function getCancionByUsuarioID(usuario_id){
+    const result = await pool.query(
+        `SELECT c.*, u.nombre_usuario
+        FROM canciones c
+        JOIN usuarios u ON c.usuario_id=u.id
+        WHERE c.usuario_id = $1
+        ORDER BY c.fecha_modificacion DESC, c.id DESC`, [usuario_id]
+    );
+
+    if (result.rows.length === 0) {
+        return [];
+    }
+    
+    return result.rows;
 }
 
 async function createCancion(nombre, genero, artista, usuario_id, link_portada, link_audio){
@@ -123,4 +140,5 @@ module.exports = {
     removeCancion,
     updateCancionNombre,
     updateCancionPortada,
+    getCancionByUsuarioID,
 };

@@ -13,13 +13,14 @@ const {
   removeUsuario,
   updateUsuarioNombre,
   updateUsuarioCarrera,
-  updateUsuariocontrasenia,
+  updateUsuarioContrasenia,
 } = require('./funciones/usuarios.js')
 
 const {
   getAllCanciones,
   getCancionByName,
   getCancionByID,
+  getCancionByUsuarioID,
   createCancion,
   removeCancion,
   updateCancionNombre,
@@ -60,6 +61,13 @@ app.get('/canciones/:id', async (req, res) => {
     return res.sendStatus(404);
   }
   res.json(cancion);
+})
+
+app.get('/usuarios/:id/canciones', async (req, res) => {
+  const usuario_id = req.params.id;
+  const canciones = await getCancionByUsuarioID(usuario_id);
+
+  res.json(canciones);
 })
 
 app.post('/canciones', async (req, res) => {
@@ -276,7 +284,7 @@ app.patch('/usuarios/:id', async (req, res) => {
   }
 
   if (contrasenia !== undefined) {
-    if (await updateUsuariocontrasenia(id, contrasenia) === undefined) {
+    if (await updateUsuarioContrasenia(id, contrasenia) === undefined) {
       return res.sendStatus(500);
     }
     usuario.contrasenia = contrasenia;
