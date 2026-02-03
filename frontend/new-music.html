@@ -12,7 +12,7 @@
             </div>
         </header>
         <div class="input-login">
-            <form>
+            <form id="form-musica">
                 <div class="barra-input">
                     <label for="nombre">Nombre de la Música:</label>
                     <input type="text" id="nombre" name="nombre">
@@ -46,13 +46,27 @@
                     </select>
                 </div>
                 <div class="barra-input">
-                    <label for="link_audio">Link a la Música: - Debe Estar en un Google Drive y Tener Permisos Públicos</label>
+                    <label for="link_audio">Link a la Música: - Debe estar guardado en algo externo. Recomendacion: Cloudinary.</label>
                     <input type="text" id="link_audio" name="link_audio">
                 </div>
+                <div class = "boton-wrapper">
+                    <button class= "boton-subir" type="submit">Subir Música</button>
+                </div>
             </form>
-            <div class = "boton-wrapper">
-                <button class= "boton-subir">Subir Música</button>
-            </div>
-        </div>
+        <script>
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            const form = document.getElementById("form-musica");
+            
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const nombre = document.getElementById("nombre");
+                const link_portada = document.getElementById("link_portada");
+                const artista = document.getElementById("artista");
+                const genero = document.getElementById("genero");
+                const usuario_id = document.getElementById(usuario.id);
+                const link_audio = document.getElementById("link_audio");
+            })
+        </script>
     </body>
 </html>

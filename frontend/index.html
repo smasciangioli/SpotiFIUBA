@@ -39,9 +39,9 @@
             <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
         </div>
         <script>
-            
+            let usuario = null
             async function validarLogin() {
-                const usuario = JSON.parse(localStorage.getItem("usuario"));
+                usuario = JSON.parse(localStorage.getItem("usuario"));
 
                 if (!usuario) {
                     actualizarPagina(null);
@@ -73,7 +73,7 @@
                 const botonPerfil = document.getElementById("boton-perfil");
                 const botonIniciarSesion = document.getElementById("boton-iniciar-sesion");
                 const botonCrearUsuario = document.getElementById("boton-crear-usuario");
-                const botonSubirMusica = document.getElementById("subir-musica");
+
 
                 if (usuario) {
                     botonLogin.style.display = "none";
@@ -92,7 +92,7 @@
             }
 
             validarLogin();
-
+            const botonSubirMusica = document.getElementById("subir-musica");
             botonSubirMusica.addEventListener("click", () => {
                 if(usuario) {
                     window.location.href = "new-music.html";

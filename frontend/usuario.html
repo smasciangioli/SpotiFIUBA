@@ -47,12 +47,33 @@
           
 
         <script>
-            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            async function validarLogin() {
+                const usuario = JSON.parse(localStorage.getItem("usuario"));
 
                 if (!usuario) {
-                window.location.href = "iniciar-sesion.html";
+                    window.location.href = "index.html";
+                    return;
                 }
 
+                try {
+                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}`)
+
+                    if(!res.ok){
+                        localStorage.clear();
+                        window.location.href = "index.html";
+                        return;
+                    }
+
+                    cargarPerfil(usuario)
+
+                } catch (fallo){
+                    console.error(fallo);
+                    localStorage.clear();
+                    window.location.href = "index.html";
+                }
+            }
+
+            function cargarPerfil(usuario) {
                 document.getElementById("nombre-perfil").textContent =
                 `Hola ${usuario.nombre}`;
 
@@ -65,7 +86,10 @@
                     localStorage.removeItem("usuario");
                     window.location.href = "index.html";
                 } 
-            });
+                });
+            }
+
+            validarLogin();
             </script>
     </body>
 </html>
