@@ -47,7 +47,7 @@ app.get('/canciones', async (req, res) => {
   res.json(canciones)
 })
 
-app.get('/canciones/:nombre', async (req, res) => {
+app.get('/canciones/nombre/:nombre', async (req, res) => {
   const canciones = await getCancionByName(req.params.nombre);
   if (canciones === undefined) {
     return res.sendStatus(404);

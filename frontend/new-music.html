@@ -79,6 +79,7 @@
             }
 
             validarLogin(usuario);
+
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
 
@@ -108,6 +109,8 @@
                         alert("Error al subir la música.");
                         return;
                     }
+                    window.location.href = "lista-canciones.html"
+
                 } catch {
                     alert("Error en la petición.")
                 }
