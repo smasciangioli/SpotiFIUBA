@@ -56,7 +56,29 @@
         <script>
             const usuario = JSON.parse(localStorage.getItem("usuario"));
             const form = document.getElementById("form-musica");
-            
+            async function validarLogin(usuario) {
+                
+                if (!usuario) {
+                    window.location.href = "index.html";
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}`)
+
+                    if(!res.ok){
+                        localStorage.clear();
+                        window.location.href = "index.html";
+                        return;
+                    }
+
+                } catch {
+                    localStorage.clear();
+                    window.location.href = "index.html";
+                }
+            }
+
+            validarLogin(usuario);
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
 
