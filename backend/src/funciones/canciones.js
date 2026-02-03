@@ -37,7 +37,7 @@ async function getCancionByID(id){
         return undefined;
     }
     
-    return result.rows;
+    return result.rows[0];
 }
 
 async function createCancion(nombre, genero, artista, usuario_id, link_portada, link_audio){

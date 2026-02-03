@@ -54,6 +54,14 @@ app.get('/canciones/:nombre', async (req, res) => {
   res.json(canciones);
 })
 
+app.get('/canciones/:id', async (req, res) => {
+  const cancion = await getCancionByID(req.params.id);
+  if (cancion === undefined) {
+    return res.sendStatus(404);
+  }
+  res.json(cancion);
+})
+
 app.post('/canciones', async (req, res) => {
   if (!req.body) return res.status(400).send("No se envio el body");
 
