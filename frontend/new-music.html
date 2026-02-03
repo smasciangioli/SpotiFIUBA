@@ -18,7 +18,7 @@
                     <input type="text" id="nombre" name="nombre">
                 </div>
                 <div class="barra-input">
-                    <label for="link_portada">Link a Imagen de Portada de la Música:</label>
+                    <label for="link_portada">Link a Imagen de Portada de la Música: - Opcional</label>
                     <input type="text" id="link_portada" name="link_portada">
                 </div>
                 <div class="barra-input">
@@ -66,6 +66,12 @@
                 const genero = document.getElementById("genero");
                 const usuario_id = document.getElementById(usuario.id);
                 const link_audio = document.getElementById("link_audio");
+
+                if (!nombre || !artista || genero || link_audio) {
+                    alert("Completa todos los campos obligatorios");
+                    return;
+                }
+                
             })
         </script>
     </body>
