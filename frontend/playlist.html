@@ -26,6 +26,10 @@
                 </div>
             </div>
         </div>
+        <div class="botones-acciones">
+            <button class="boton-subir" id="boton-editar-playlist">Editar Playlist</button>
+            <button class="boton-borrar" id="boton-borrar-playlist">Borrar Playlist</button>    
+        </div>
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const playlist_id = URLParametros.get("id");
@@ -70,6 +74,8 @@
             }
 
             cargarCancionesPlaylist();
+            const botonBorrarPlaylist = document.getElementById("boton-borrar-playlist")
+            const botonEditarPlaylist = document.getElementById("boton-editar-playlist")
         </script>
     </body>
 </html>
