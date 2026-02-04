@@ -19,7 +19,7 @@
             <div class="cancion-elemento">
                 <img src="PORTADA" class="cancion-portada">
                 <div class="detalles-cancion">
-                    <h3 class="cancion-titulo">Nombre de Playlist</h3>
+                    <h3 class="cancion-titulo">Nombre de Cancion</h3>
                 </div>
             </div>
         </div>
@@ -35,6 +35,7 @@
                 const contenedorCanciones = document.getElementById("contenedor-canciones");
                     const res = await fetch(`http://localhost:3000/playlists/${playlist_id}/canciones`);
                 try {
+                    document.getElementById("titulo-canciones").textContent = playlist_nombre
                     if(!res.ok) {
                         alert("Hubo un problema cargando las canciones.");
                         return;
@@ -43,7 +44,6 @@
                     const canciones = await res.json();
 
                     contenedorCanciones.innerHTML = "";
-                    document.getElementById("titulo-canciones").textContent = playlist_nombre
 
                     canciones.forEach(cancion => {
                         const elemento = document.createElement("div");
