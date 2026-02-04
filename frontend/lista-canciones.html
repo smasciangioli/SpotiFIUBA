@@ -51,6 +51,13 @@
 
                     contenedorCanciones.innerHTML = "";
 
+                    if (usuario_id) {
+                        document.getElementById("titulo-canciones").textContent = "Canciones de " + canciones[0].nombre_usuario;
+                    }
+                    else {
+                        document.getElementById("titulo-canciones").textContent = "Canciones"
+                    }
+
                     canciones.forEach(cancion => {
                         const elemento = document.createElement("div");
                         elemento.classList.add("cancion-elemento");
