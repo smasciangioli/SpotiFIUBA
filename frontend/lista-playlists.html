@@ -12,7 +12,7 @@
             </div>
         </header>
         <div class="saludo">
-            <p id="titulo-playlists"></p>
+            <p id="titulo-playlists">Playlists</p>
             <hr class="separador">
         </div>
         <div class="contenedor-canciones" id="contenedor-playlists">
@@ -42,7 +42,7 @@
 
                     const playlists = await res.json();
                     contenedorPlaylists.innerHTML = "";
-                    document.getElementById("titulo-playlists").textContent = "Playlists de: " + playlists[0].nombre_usuario;
+                    document.getElementById("titulo-playlists").textContent = "Playlists de " + playlists[0].nombre_usuario ;
 
 
                     playlists.forEach(playlist => {
@@ -64,7 +64,7 @@
                 } 
                 catch {
                     alert("No se pudo conectar con el servidor.");
-                    window.location.href = "index.html";
+                    return;
                 }
             }
 
