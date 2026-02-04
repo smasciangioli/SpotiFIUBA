@@ -28,7 +28,7 @@
                 <a href = "new-music.html" class = "boton-subir"> Subir Cancion </a>
                  <a href = "playlist.html" class="boton-subir"> Nueva Playlist</a>
                  <a href = "editar.html" class ="boton-subir">Editar perfil</a>
-                 <a href ="lista-canciones.html" class = "boton-subir">Tus Canciones</a>
+                 <button id="boton-canciones-usuario" class = "boton-subir">Tus Canciones</button>
 
             </div>
         <div class = "cuadro-playlists">
@@ -82,6 +82,9 @@
                 document.getElementById("email-perfil").textContent =
                 usuario.email;
                 document.getElementById("carrera-perfil").textContent = usuario.carrera;
+                document.getElementById("boton-canciones-usuario").addEventListener("click", () => {
+                    window.location.href = `lista-canciones.html?id=${usuario.id}`;
+                })
                 const botonLogout = document.getElementById("logout")
                 botonLogout.addEventListener("click", () =>{
                 if(confirm("¿Estás seguro que querés cerrar sesion?")) {
