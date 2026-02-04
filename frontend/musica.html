@@ -46,7 +46,6 @@
 
             async function cargarPlaylistsUsuario() {
                 const selectPlaylists = document.getElementById("selector-playlists");
-                const botonPlaylists = document.getElementById("boton-playlists");      
                 
                 try {
                     const respuesta = await fetch(`http://localhost:3000/usuarios/${usuarioLoggeado.id}/playlists`);
@@ -129,6 +128,29 @@
             }
         
             cargarMusica();
+
+            const botonPlaylists = document.getElementById("boton-playlists");    
+            botonPlaylists.addEventListener("click", () => {
+                const playlist_id = selectPlaylists.value;
+
+                if (!playlist_id) {
+                    alert("Selecciona una playlist.")
+                    return;
+                }
+
+                try {
+                    const respuesta = fetch(`http://localhost:3000/playlists/${playlist_id}/cancion/${cancion_id}`, {method: "POST"});
+
+                    if(!res.ok) {
+                        alert("La cancion ya se encuentra en la playlist u ocurrio un error.");
+                        return;
+                    }
+
+                }
+                catch {
+
+                }
+            })  
         </script>
     </body>
 </html>

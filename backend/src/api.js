@@ -322,7 +322,7 @@ app.post('/playlists/:playlist_id/cancion/:cancion_id', async (req, res) => {
   }
 
   const resultado = await addCancionPlaylist(playlist_id, cancion_id);
-  if (resultado === undefined) return res.sendStatus(500);
+  if (resultado === undefined) return res.sendStatus(400);
 
   res.status(201).json(resultado);
 })
@@ -336,7 +336,7 @@ app.delete('/playlists/:playlist_id/cancion/:cancion_id', async (req, res) => {
   }
 
   if (!(await removeCancionFromPlaylist(playlist_id, cancion_id))) {
-    return res.sendStatus(400);
+    return res.sendStatus(500);
   }
 
   res.json(resultado);
