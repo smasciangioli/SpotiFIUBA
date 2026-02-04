@@ -28,7 +28,8 @@
             <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const playlist_id = URLParametros.get("id");
-            const form = document.getElementById("form-editar")
+            const playlist_nombre = URLParametros.get("nombrePlaylist");
+            const form = document.getElementById("form-editar");
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 
@@ -56,16 +57,16 @@
 
                     if(!res.ok){
                         alert("Ocurrió un error editando la playlist.");
-                        window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
+                        window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist_nombre}`;
                         return;
                     }
 
                     alert("La playlist se editó correctamente.");
-                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
+                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${body.nombre || playlist_nombre}`;
                 }
                 catch {
                     alert("Ocurrió un error editando la playlist.");
-                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
+                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist_nombre}`;
                     return;
                 }
             }
