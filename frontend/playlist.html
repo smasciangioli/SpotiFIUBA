@@ -11,5 +11,74 @@
                 <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
             </div>
         </header>
+        <div class="saludo">
+            <p id="titulo-canciones"></p>
+            <hr class="separador">
+        </div>
+        <div class="contenedor-canciones" id="contenedor-canciones">
+            <div class="cancion-elemento">
+                <img src="PORTADA" class="cancion-portada">
+                <div class="detalles-cancion">
+                    <h3 class="cancion-titulo">Nombre de Cancion</h3>
+                    <div class="cancion-artista-genero">
+                        <p class="datos">Artista - Genero</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const URLParametros = new URLSearchParams(window.location.search);
+            const playlist_id = URLParametros.get("id");
+            async function cargarCanciones() {
+                const contenedorCanciones = document.getElementById("contenedor-canciones");
+                    const res = await fetch(`http://localhost:3000/playlists/${playlist_id}/canciones`);
+
+                    if(!res.ok) {
+                        alert("Hubo un problema cargando las canciones.");
+                        return;
+                    }
+
+                    const canciones = await res.json();
+
+                    contenedorCanciones.innerHTML = "";
+
+                    if (usuario_id) {
+                        document.getElementById("titulo-canciones").textContent = "Canciones de " + canciones[0].nombre_usuario;
+                    }
+                    else {
+                        document.getElementById("titulo-canciones").textContent = "Canciones"
+                    }
+
+                    canciones.forEach(cancion => {
+                        const elemento = document.createElement("div");
+                        elemento.classList.add("cancion-elemento");
+                        
+                        elemento.innerHTML = `
+                            <img src="${cancion.link_portada || 'https://i.pinimg.com/736x/b1/56/d8/b156d88727d0be3f16e79af15f66a122.jpg'}" class="cancion-portada">
+                            <div class="detalles-cancion">
+                                <h3 class="cancion-titulo">${cancion.nombre}</h3>
+                                <div class="cancion-artista-genero">
+                                    <p class="datos">${cancion.artista} - ${cancion.genero}</p>
+                                </div>
+                            </div>
+                        `;
+                        elemento.addEventListener("click", () =>
+                            window.location.href = `musica.html?id=${cancion.id}`
+                        )
+                        contenedorCanciones.appendChild(elemento);
+                    });
+                } 
+                catch {
+                    alert("No se pudo conectar con el servidor.");
+                    window.location.href = "index.html";
+                }
+            }
+
+            cargarCanciones();
+            const botonSubirMusica = document.getElementById("subir-musica");
+            botonSubirMusica.addEventListener("click", () => {
+                window.location.href = "new-music.html";
+            })
+        </script>
     </body>
 </html>

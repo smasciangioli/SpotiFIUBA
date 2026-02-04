@@ -54,7 +54,7 @@
                             </div>
                         `;
                         elemento.addEventListener("click", () =>
-                            window.location.href = `playlist.html?id=${playlist.id}`
+                            window.location.href = `playlist.html?id=${playlist.id}&nombrePlaylist=${playlist.nombre}`
                         )
                         contenedorPlaylists.appendChild(elemento);
                     });
