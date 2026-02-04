@@ -32,7 +32,6 @@
             const URLParametros = new URLSearchParams(window.location.search);
             const cancion_id = URLParametros.get("id");
             const usuarioLoggeado = JSON.parse(localStorage.getItem("usuario"));
-            console.log(usuarioLoggeado.id);
 
             if(!cancion_id) {
                 alert("Esa cancion no es valida.");

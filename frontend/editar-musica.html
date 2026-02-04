@@ -11,5 +11,95 @@
                 <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
             </div>
         </header>
+        <div class="input-login">
+            <form id="form-editar">
+                <div class="barra-input">
+                    <label for="nombre">Nuevo Nombre de la Música: - Opcional</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <div class="barra-input">
+                    <label for="link_portada">Nuevo Link a Imagen de Portada de la Música: - Opcional</label>
+                    <input type="text" id="link_portada" name="link_portada">
+                </div>
+                <div class="barra-input">
+                    <label for="genero">Nuevo Género de la Musica: - Opcional</label>
+                    <select class="select-pagina" id="genero" name="genero">
+                        <option value=""></option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Rap">Rap</option>
+                        <option value="Musica Electronica">Música Electrónica</option>
+                        <option value="R&B">R&B</option>
+                        <option value="Reggaeton">Reggaetón</option>
+                        <option value="Salsa">Salsa</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Heavy Metal">Heavy Metal</option>
+                        <option value="Musica Clasica">Música Clásica</option>
+                        <option value="Country">Country</option>
+                        <option value="Bachata">Bachata</option>
+                        <option value="Kpop">K-Pop</option>
+                        <option value="Japonesa">Japonesa</option>
+                    </select>
+                </div>
+                <div class = "boton-wrapper">
+                    <button id="boton-subir" class= "boton-subir" type="submit">Subir Música</button>
+                </div>
+            </form>
+        </div>    
+        <script>
+            const URLParametros = new URLSearchParams(window.location.search);
+            const cancion_id = URLParametros.get("id");
+            const form = document.getElementById("form-editar")
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                const nombre = document.getElementById("nombre");
+                const link_portada = document.getElementById("link_portada");
+                const genero = document.getElementById("genero");
+                const body = {}
+
+                if(nombre.value.trim() !== ""){
+                    body.nombre = nombre.value.trim();
+                }
+                if(link_portada.value.trim() !== ""){
+                    body.link_portada = link_portada.value.trim();
+                }
+                if(genero.value.trim() !== ""){
+                    body.genero = genero.value.trim();
+                }
+
+                editarMusica(body);
+            })
+
+            async function editarMusica(body) {
+                try {
+                const res = await fetch(`http://localhost:3000/canciones/${cancion_id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" }, 
+                            body: JSON.stringify(body)
+                        });
+
+                    if(!res.ok){
+                        alert("Ocurrió un error editando la música.");
+                        window.location.href = `musica.html?id=${cancion_id}`;
+                        return;
+                    }
+
+                    alert("La musica se editó correctamente.");
+                    window.location.href = `musica.html?id=${cancion_id}`;
+                }
+                catch {
+                    alert("Ocurrió un error editando la música.");
+                    window.location.href = `musica.html?id=${cancion_id}`;
+                    return;
+                }
+            }
+
+
+
+
+
+        </script>
     </body>
 </html>
