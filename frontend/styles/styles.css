@@ -467,14 +467,14 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px;
     color: white;
 }
 
 
 .portada-musica {
-    width: 300px;
-    height: 300px;
+    margin-top: 40px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
     border-radius: 12px;
     margin-bottom: 20px;
@@ -482,23 +482,27 @@ header {
 
 
 .titulo-musica {
-    font-size: 32px;
+    font-size: 50px;
+    margin-top: 0px;
     margin-bottom: 15px;
     text-align: center;
+    color: #1c9fdb;
 }
 
-/* Fila de info */
 .datos-musica {
     width: 100%;
     max-width: 600px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-    font-size: 14px;
-    opacity: 0.85;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 25px;
+    border-radius: 15px;
+    background-color: #1c9fdb;
+
 }
 
-/* Reproductor */
 #audio,
 #reproductor {
     width: 100%;
