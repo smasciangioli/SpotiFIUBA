@@ -29,10 +29,11 @@
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const playlist_id = URLParametros.get("id");
-            async function cargarCanciones() {
+            const playlist_nombre = URLParametros.get("nombrePlaylist");
+            async function cargarCancionesPlaylist() {
                 const contenedorCanciones = document.getElementById("contenedor-canciones");
                     const res = await fetch(`http://localhost:3000/playlists/${playlist_id}/canciones`);
-
+                try {
                     if(!res.ok) {
                         alert("Hubo un problema cargando las canciones.");
                         return;
@@ -41,13 +42,7 @@
                     const canciones = await res.json();
 
                     contenedorCanciones.innerHTML = "";
-
-                    if (usuario_id) {
-                        document.getElementById("titulo-canciones").textContent = "Canciones de " + canciones[0].nombre_usuario;
-                    }
-                    else {
-                        document.getElementById("titulo-canciones").textContent = "Canciones"
-                    }
+                    document.getElementById("titulo-canciones").textContent = playlist_nombre
 
                     canciones.forEach(cancion => {
                         const elemento = document.createElement("div");
@@ -70,15 +65,11 @@
                 } 
                 catch {
                     alert("No se pudo conectar con el servidor.");
-                    window.location.href = "index.html";
+                    window.location.href = "lista-playlists.html";
                 }
             }
 
-            cargarCanciones();
-            const botonSubirMusica = document.getElementById("subir-musica");
-            botonSubirMusica.addEventListener("click", () => {
-                window.location.href = "new-music.html";
-            })
+            cargarCancionesPlaylist();
         </script>
     </body>
 </html>
