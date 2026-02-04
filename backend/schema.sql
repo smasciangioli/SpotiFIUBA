@@ -31,7 +31,7 @@ CREATE TABLE playlists (
 
 -- Tabla que vincula la playlist con sus canciones
 CREATE TABLE playlist_canciones (
-    playlist_id INTEGER NOT NULL REFERENCES playlists(id),
-    cancion_id INTEGER NOT NULL REFERENCES canciones(id),
+    playlist_id INTEGER NOT NULL REFERENCES playlists(id) ON DELETE CASCADE, 
+    cancion_id INTEGER NOT NULL REFERENCES canciones(id) ON DELETE CASCADE,
     PRIMARY KEY (playlist_id,cancion_id)
 );

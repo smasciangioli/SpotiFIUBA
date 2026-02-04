@@ -26,6 +26,9 @@
                 </div>
             </div>
         </div>
+        <div id="boton-musica">
+            <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
+        </div>
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const usuario_id = URLParametros.get("id");
@@ -84,6 +87,10 @@
             }
 
             cargarCanciones();
+            const botonSubirMusica = document.getElementById("subir-musica");
+            botonSubirMusica.addEventListener("click", () => {
+                window.location.href = "new-music.html";
+            })
         </script>
     </body>
 </html>
