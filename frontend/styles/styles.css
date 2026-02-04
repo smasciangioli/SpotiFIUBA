@@ -301,6 +301,7 @@ header {
     color: white;
     background-color: #1c9fdb;
     margin-top: -10px;
+    cursor: pointer;
 }
 
 #nombre-perfil {
@@ -507,4 +508,20 @@ header {
 #reproductor {
     width: 100%;
     max-width: 600px;
+}
+
+.botones-acciones {
+    display: none;
+}
+
+.boton-borrar {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(221, 23, 23);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: hidden;
+    font-size: 17px;
+    margin-top: -10px;
 }

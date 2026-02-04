@@ -20,13 +20,19 @@
                 <p id="usuario-musica">Subida Por: </p>
                 <p id="genero-musica">Genero: </p>
             </div>
-
             <audio id="reproductor" controls></audio>
+        </div>
+
+        <div class="botones-acciones" id="botones-acciones">
+            <button class="boton-subir" id="boton-editar">Editar Cancion</button>
+            <button class="boton-borrar" id="boton-borrar">Borrar Cancion</button>
         </div>
 
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const cancion_id = URLParametros.get("id");
+            const usuarioLoggeado = JSON.parse(localStorage.getItem("usuario"));
+            console.log(usuarioLoggeado.id);
 
             if(!cancion_id) {
                 alert("Esa cancion no es valida.");
@@ -43,6 +49,7 @@
                     }
 
                     const cancion = await res.json();  
+                    console.log(cancion.usuario_id)
 
                     const portadaMusica = document.getElementById("portada-musica");
                     const tituloMusica = document.getElementById("titulo-musica");
@@ -58,6 +65,27 @@
                     generoMusica.textContent = "Genero: " + cancion.genero;
                     reproductor.src = cancion.link_audio;
 
+                    if(usuarioLoggeado.id === cancion.usuario_id) {
+                        document.getElementById("botones-acciones").style.display = "flex";
+                        document.getElementById("boton-editar").addEventListener("click", () => {
+                            window.location.href = `editar-musica.html?id=${cancion.id}`;
+                        })
+                        document.getElementById("boton-borrar").addEventListener("click", async () => {
+                            if(confirm("Seguro que queres borrar la cancion?")) {
+                                const resBorrar = await fetch(`http://localhost:3000/canciones/${cancion_id}`, {method: "DELETE"});
+
+                                if(resBorrar.ok){
+                                    alert("Cancion fue borrada.");
+                                    window.location.href = "lista-canciones.html";
+                                } 
+                                else {
+                                    alert("No se pudo borrar la cancion.");
+                                }
+                                
+                            }
+                        })
+                    }
+                
                 } 
                 catch {
                     alert("Esa cancion no es valida.");
@@ -65,7 +93,7 @@
                     return;
             }
             }
-
+        
             cargarMusica();
         </script>
     </body>
