@@ -29,7 +29,12 @@ Alternativamente, se puede usar docker compose up -d --build, para ejecutarlo en
  <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/035ed996-aefd-4f9d-aa5c-df576cc844ab" />
  Para subir una cancion podremos hacerlo ya sea deade nuestro perfil con el boton visto en la captura o desde la pagina principal tocando el 'Más' de abajo a la derecha.
  <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/196f221e-4eb3-428f-8883-97318c10d331" />
- Aqui es importante completar todos los campos obligatorios con la informacion correspondiente de la cancion que queremos subir
+ Aqui es importante completar todos los campos obligatorios con la informacion correspondiente de la cancion que queremos subir.  Cabe aclarar que es recomendable que la tanto el archivo de audio como el de la imagen esten subidos a una plataforma como Cloudinary, ya que no se aceptan todo tipo de URLs. Una vez toquemos subir cancion podremos ver una lista de todas las canciones subidas, ordenadas de mas nueva a mas vieja.
+ <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/79cadd21-8565-4327-becb-d6eb6f204438" />
+ Haciendo click en la que queramos podremos escucharla.
+ <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/0215530b-74fc-4e80-b3dc-96e278c6d516" />
+ Si quisieramos ver solo las canciones subidas con nuestro usuario, podemos hacerlo con el boton 'Tus canciones' en la pantalla del perfil.
+
 
 
 
