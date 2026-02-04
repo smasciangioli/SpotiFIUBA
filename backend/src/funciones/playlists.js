@@ -125,7 +125,7 @@ async function getCancionFromPlaylist(playlist_id, cancion_id){
             [playlist_id, cancion_id]
         );
 
-        if(result.rowCount.length === 0){
+        if(result.rowCount === 0){
             return undefined;
         }
 
@@ -159,7 +159,7 @@ async function getAllCancionesFromPlaylist(playlist_id){
             [playlist_id]
         );
 
-        if(result.rowCount.length === 0){
+        if(result.rowCount === 0){
             return undefined;
         }
 
