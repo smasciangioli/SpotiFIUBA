@@ -39,7 +39,7 @@
             <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
         </div>
         <div class="botones-acciones">
-            <button class="boton-subir" id="boton-lista-playlists" onclick="window.location.href='lista-playlist.html'">Mis Playlists</button>
+            <button class="boton-subir" id="boton-lista-playlists">Mis Playlists</button>
             <button class="boton-subir" id="boton-lista-canciones" onclick="window.location.href='lista-canciones.html'">Canciones</button>    
         </div>
         <script>
@@ -102,6 +102,10 @@
                     botonCanciones.style.display = "none";
                     botonMusica.style.display = "none";
                 }
+
+                botonListaPlaylists.addEventListener("click", () => {
+                    window.location.href = `lista-playlists.html?=${usuario.id}`;
+                })
             }
 
             validarLogin();
@@ -114,6 +118,7 @@
                 }
                 
             })
+
         </script>
         
     </body>
