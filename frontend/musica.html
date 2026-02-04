@@ -12,28 +12,61 @@
             </div>
         </header>
 
+        <div class="contenedor-cancion">
+            <img id="portada-musica" class="portada-musica">
+            <h1 id="titulo-musica" class="titulo-musica"></h1>
+            <div class="datos-musica">
+                <p id="autor-musica">De: </p>
+                <p id="usuario-musica">Subida Por: </p>
+                <p id="genero-musica">Genero: </p>
+            </div>
+
+            <audio id="reproductor" controls></audio>
+        </div>
 
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const cancion_id = URLParametros.get("id");
 
             if(!cancion_id) {
-                alert("Esa cancion no es valida.")
+                alert("Esa cancion no es valida.");
                 window.location.href = "lista-canciones.html";
-                return;
             }
+            async function cargarMusica() {
+                try {
+                    const res = await fetch(`http://localhost:3000/canciones/${cancion_id}`);
 
-            try {
-                const res = await fetch(`http://localhost:3000/canciones/${cancion_id}`);
+                    if(!res.ok) {
+                        alert("Esa cancion no existe.");
+                        window.location.href = "lista-canciones.html";
+                        return;
+                    }
 
-                if(!res.ok) {
-                    alert("Esa cancion no existe.")
+                    const cancion = await res.json();  
+
+                    const portadaMusica = document.getElementById("portada-musica");
+                    const tituloMusica = document.getElementById("titulo-musica");
+                    const autorMusica = document.getElementById("autor-musica");
+                    const usuarioMusica = document.getElementById("usuario-musica");
+                    const generoMusica = document.getElementById("genero-musica");
+                    const reproductor = document.getElementById("reproductor");
+
+                    portadaMusica.src = cancion.link_portada || 'https://i.pinimg.com/736x/b1/56/d8/b156d88727d0be3f16e79af15f66a122.jpg';
+                    tituloMusica.textContent = cancion.nombre;
+                    autorMusica.textContent = "De: " + cancion.artista;
+                    usuarioMusica.textContent = "Subida Por: " + cancion.nombre_usuario;
+                    generoMusica.textContent = "Genero: " + cancion.genero;
+                    reproductor.src = cancion.link_audio;
+
+                } 
+                catch {
+                    alert("Esa cancion no es valida.");
                     window.location.href = "lista-canciones.html";
                     return;
-                }
-
-                
             }
+            }
+
+            cargarMusica();
         </script>
     </body>
 </html>

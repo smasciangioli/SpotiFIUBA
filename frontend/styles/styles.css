@@ -462,3 +462,45 @@ header {
     font-size: 20px;
     color: white;
 }
+
+.contenedor-cancion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    color: white;
+}
+
+
+.portada-musica {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+
+.titulo-musica {
+    font-size: 32px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Fila de info */
+.datos-musica {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* Reproductor */
+#audio,
+#reproductor {
+    width: 100%;
+    max-width: 600px;
+}
