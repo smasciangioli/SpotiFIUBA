@@ -24,6 +24,7 @@ const {
   createCancion,
   removeCancion,
   updateCancionNombre,
+  updateCancionGenero,
   updateCancionPortada,
 } = require('./funciones/canciones.js')
 
@@ -104,7 +105,7 @@ app.patch('/canciones/:id', async (req, res) => {
   if (!req.body) return res.status(400).send("No se envio el body");
 
   const id = req.params.id;
-  const { nombre, link_portada } = req.body;
+  const { nombre, genero, link_portada } = req.body;
 
   if ((await getCancionByID(id)) === undefined) {
     return res.status(404).send("No existe una cancion con ese id");
@@ -117,6 +118,13 @@ app.patch('/canciones/:id', async (req, res) => {
       return res.sendStatus(500);
     }
     cancion.nombre = nombre;
+  }
+
+  if(genero !==undefined) {
+    if(await updateCancionGenero(id, genero) === undefined){
+      return res.sendStatus(500);
+    }
+    cancion.genero = genero;
   }
 
   if (link_portada !== undefined) {

@@ -112,6 +112,27 @@ async function updateCancionNombre(id, nuevo_nombre){
     }
 }
 
+async function updateCancionGenero(id, nuevo_genero){
+    try{
+        const result = await pool.query(
+            "UPDATE canciones SET genero = $2, fecha_modificacion = CURRENT_DATE WHERE id = $1", [id, nuevo_genero]
+        );
+
+        if(result.rowCount === 0){
+            return undefined;
+        }
+
+        return {
+            id,
+            nuevo_genero,
+        };
+
+    }
+    catch {
+        return undefined;
+    }
+}
+
 async function updateCancionPortada(id, nueva_portada){
     try {
         const result = await pool.query(
@@ -139,6 +160,7 @@ module.exports = {
     createCancion,
     removeCancion,
     updateCancionNombre,
+    updateCancionGenero,
     updateCancionPortada,
     getCancionByUsuarioID,
 };
