@@ -529,3 +529,11 @@ header {
     font-size: 17px;
     margin-top: -10px;
 }
+
+.botones-borrar-musicas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
