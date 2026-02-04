@@ -28,6 +28,10 @@
             <button class="boton-borrar" id="boton-borrar">Borrar Cancion</button>
         </div>
 
+        <div class="botones-musica" id="botones-playlists">
+            <select class="select-pagina" name="playlists" id="selector-playlists"></select>
+            <button class="boton-subir" id="boton-playlists">Agregar a la Playlist</button>
+        </div>
         <script>
             const URLParametros = new URLSearchParams(window.location.search);
             const cancion_id = URLParametros.get("id");
@@ -37,6 +41,14 @@
                 alert("Esa cancion no es valida.");
                 window.location.href = "lista-canciones.html";
             }
+
+            async function cargarPlaylistsUsuario() {
+                    const selectPlaylists = document.getElementById("selector-playlists");
+                    const botonPlaylists = document.getElementById("boton-playlists");
+
+                    
+            }
+
             async function cargarMusica() {
                 try {
                     const res = await fetch(`http://localhost:3000/canciones/${cancion_id}`);
@@ -48,8 +60,6 @@
                     }
 
                     const cancion = await res.json();  
-                    console.log(cancion.usuario_id)
-
                     const portadaMusica = document.getElementById("portada-musica");
                     const tituloMusica = document.getElementById("titulo-musica");
                     const autorMusica = document.getElementById("autor-musica");
@@ -66,6 +76,7 @@
 
                     if(usuarioLoggeado.id === cancion.usuario_id) {
                         document.getElementById("botones-musica").style.display = "flex";
+
                         document.getElementById("boton-editar").addEventListener("click", () => {
                             window.location.href = `editar-musica.html?id=${cancion.id}`;
                         })
@@ -84,6 +95,7 @@
                             }
                         })
                     }
+                    document.getElementById("botones-playlists").style.display = "flex";
                 
                 } 
                 catch {
