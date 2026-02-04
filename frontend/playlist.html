@@ -19,10 +19,7 @@
             <div class="cancion-elemento">
                 <img src="PORTADA" class="cancion-portada">
                 <div class="detalles-cancion">
-                    <h3 class="cancion-titulo">Nombre de Cancion</h3>
-                    <div class="cancion-artista-genero">
-                        <p class="datos">Artista - Genero</p>
-                    </div>
+                    <h3 class="cancion-titulo">Nombre de Playlist</h3>
                 </div>
             </div>
         </div>
@@ -74,8 +71,22 @@
             }
 
             cargarCancionesPlaylist();
-            const botonBorrarPlaylist = document.getElementById("boton-borrar-playlist")
-            const botonEditarPlaylist = document.getElementById("boton-editar-playlist")
+            document.getElementById("boton-borrar-playlist").addEventListener("click", async function(){
+                if(confirm("Seguro que queres borrar la playlist?")) {
+                    const resBorrar = await fetch(`http://localhost:3000/playlists/${playlist_id}`, {method: "DELETE"});
+
+                    if(resBorrar.ok) {
+                        alert("La playlist se borro correctamente.");
+                        window.location.href = "lista-playlists.html";
+                        return;
+                    }
+                    else {
+                        alert("Hubo un problema borrando la playlist.");
+                        return;
+                    }
+                }
+            })
+            document.getElementById("boton-editar-playlist");
         </script>
     </body>
 </html>
