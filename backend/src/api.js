@@ -336,7 +336,7 @@ app.delete('/playlists/:playlist_id/cancion/:cancion_id', async (req, res) => {
   }
 
   if (!(await removeCancionFromPlaylist(playlist_id, cancion_id))) {
-    return res.sendStatus(500);
+    return res.sendStatus(400);
   }
 
   res.json(resultado);
