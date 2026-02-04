@@ -27,12 +27,13 @@
             </div>
         </div>
         <script>
+            
             async function cargarCanciones() {
                 const contenedorCanciones = document.getElementById("contenedor-canciones");
 
                 try {
                     const usuario = JSON.parse(localStorage.getItem("usuario"));
-                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}/canciones`);
+                    const res = await fetch(`http://localhost:3000/canciones`);
 
 
                     if(!res.ok) {
