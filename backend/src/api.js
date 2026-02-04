@@ -31,6 +31,7 @@ const {
 const {
   getAllPlaylists,
   getPlaylistByID,
+  getPlaylistsByUsuarioID,
   createPlaylist,
   removePlaylist,
   updatePlaylistNombre,
@@ -149,6 +150,13 @@ app.get('/playlists/:id', async (req, res) => {
     return res.sendStatus(404);
   }
   res.json(playlist);
+})
+
+app.get('/usuarios/:id/playlists', async (req, res) => {
+  const usuario_id = req.params.id;
+  const playlists = await getPlaylistsByUsuarioID(usuario_id);
+
+  res.json(playlists);
 })
 
 app.post('/playlists', async (req, res) => {

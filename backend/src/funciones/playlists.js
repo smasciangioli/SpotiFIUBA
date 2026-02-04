@@ -25,6 +25,21 @@ async function getPlaylistByID(id){
     return result.rows[0];
 }
 
+async function getPlaylistsByUsuarioID(usuario_id){
+    const result = await pool.query(
+        `SELECT p.*, u.nombre_usuario
+        FROM playlists p
+        JOIN usuarios u ON p.creador_id=u.id
+        WHERE p.creador_id = $1
+        ORDER BY p.fecha_modificacion DESC, p.id DESC`, [usuario_id]
+    );
+
+    if (result.rows.length === 0) {
+        return [];
+    }
+    
+    return result.rows;
+}
 async function createPlaylist(nombre, creador_id, link_portada){
     try{
         const result = pool.query(
@@ -172,6 +187,7 @@ async function getAllCancionesFromPlaylist(playlist_id){
 module.exports = {
     getAllPlaylists,
     getPlaylistByID,
+    getPlaylistsByUsuarioID,
     createPlaylist,
     removePlaylist,
     updatePlaylistNombre,
