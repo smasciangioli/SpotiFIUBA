@@ -38,6 +38,7 @@
             const URLParametros = new URLSearchParams(window.location.search);
             const cancion_id = URLParametros.get("id");
             const usuarioLoggeado = JSON.parse(localStorage.getItem("usuario"));
+            const selectPlaylists = document.getElementById("selector-playlists");
 
             if(!cancion_id) {
                 alert("Esa cancion no es valida.");
@@ -45,7 +46,6 @@
             }
 
             async function cargarPlaylistsUsuario() {
-                const selectPlaylists = document.getElementById("selector-playlists");
                 
                 try {
                     const respuesta = await fetch(`http://localhost:3000/usuarios/${usuarioLoggeado.id}/playlists`);
@@ -130,7 +130,7 @@
             cargarMusica();
 
             const botonPlaylists = document.getElementById("boton-playlists");    
-            botonPlaylists.addEventListener("click", () => {
+            botonPlaylists.addEventListener("click", async function(e) {
                 const playlist_id = selectPlaylists.value;
 
                 if (!playlist_id) {
@@ -139,16 +139,17 @@
                 }
 
                 try {
-                    const respuesta = fetch(`http://localhost:3000/playlists/${playlist_id}/cancion/${cancion_id}`, {method: "POST"});
+                    const respuesta = await fetch(`http://localhost:3000/playlists/${playlist_id}/cancion/${cancion_id}`, {method: "POST"});
 
-                    if(!res.ok) {
+                    if(!respuesta.ok) {
                         alert("La cancion ya se encuentra en la playlist u ocurrio un error.");
                         return;
                     }
-
+                    alert("La playlist se agrego correctamente.");
                 }
                 catch {
-
+                    alert("Ocurrio un error.");
+                    return;
                 }
             })  
         </script>
