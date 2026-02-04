@@ -12,7 +12,7 @@
             </div>
         </header>
         <div class="input-login">
-            <form id="form-playlist">
+            <form id="form-editar">
                 <div class="barra-input">
                     <label for="nombre">Nuevo Nombre de la Playlist: - Opcional</label>
                     <input type="text" id="nombre" name="nombre">
@@ -22,8 +22,53 @@
                     <input type="text" id="link_portada" name="link_portada">
                 </div>
                 <div class = "boton-wrapper">
-                    <button class= "boton-subir" type="submit">Crear Playlist</button>
+                    <button class= "boton-subir" type="submit">Editar Playlist</button>
                 </div>
             </form>
+            <script>
+            const URLParametros = new URLSearchParams(window.location.search);
+            const playlist_id = URLParametros.get("id");
+            const form = document.getElementById("form-editar")
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                const nombre = document.getElementById("nombre");
+                const link_portada = document.getElementById("link_portada");
+                const body = {}
+
+                if(nombre.value.trim() !== ""){
+                    body.nombre = nombre.value.trim();
+                }
+                if(link_portada.value.trim() !== ""){
+                    body.link_portada = link_portada.value.trim();
+                }
+
+                editarPlaylist(body);
+            })
+
+            async function editarPlaylist(body) {
+                try {
+                const res = await fetch(`http://localhost:3000/playlists/${playlist_id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" }, 
+                            body: JSON.stringify(body)
+                        });
+
+                    if(!res.ok){
+                        alert("Ocurrió un error editando la playlist.");
+                        window.location.href = `playlist.html?id=${playlist_id}`;
+                        return;
+                    }
+
+                    alert("La playlist se editó correctamente.");
+                    window.location.href = `playlist.html?id=${playlist_id}`;
+                }
+                catch {
+                    alert("Ocurrió un error editando la playlist.");
+                    window.location.href = `playlist.html?id=${playlist_id}`;
+                    return;
+                }
+            }
+            </script>
     </body>
 </html>
