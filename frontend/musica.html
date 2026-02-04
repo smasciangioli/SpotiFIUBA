@@ -29,7 +29,9 @@
         </div>
 
         <div class="botones-musica" id="botones-playlists">
-            <select class="select-pagina" name="playlists" id="selector-playlists"></select>
+            <select class="select-pagina" name="playlists" id="selector-playlists">
+                <option value="">Selecciona una playlist.</option>
+            </select>
             <button class="boton-subir" id="boton-playlists">Agregar a la Playlist</button>
         </div>
         <script>
@@ -43,11 +45,31 @@
             }
 
             async function cargarPlaylistsUsuario() {
-                    const selectPlaylists = document.getElementById("selector-playlists");
-                    const botonPlaylists = document.getElementById("boton-playlists");
-
+                const selectPlaylists = document.getElementById("selector-playlists");
+                const botonPlaylists = document.getElementById("boton-playlists");      
+                
+                try {
+                    const respuesta = await fetch(`http://localhost:3000/usuarios/${usuarioLoggeado.id}/playlists`);
                     
-            }
+                    if(!respuesta.ok) {
+                        alert("No se pudo cargar las playlists.");
+                        return;
+                    }
+
+                    const playlists = await respuesta.json();
+
+                    playlists.forEach(playlist => {
+                        const opcion = document.createElement("option");
+                        opcion.value = playlist.id;
+                        opcion.textContent = playlist.nombre;
+                        selectPlaylists.appendChild(opcion);
+                    });
+                }
+                catch {
+                    alert("No se pudo cargar las playlists.");
+                    return;
+                }
+            }   
 
             async function cargarMusica() {
                 try {
@@ -96,6 +118,7 @@
                         })
                     }
                     document.getElementById("botones-playlists").style.display = "flex";
+                    cargarPlaylistsUsuario();
                 
                 } 
                 catch {
