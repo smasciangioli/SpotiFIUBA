@@ -45,27 +45,27 @@
 
                 editarPlaylist(body);
             })
-
-            async function editarPlaylist(body) {
+            let playlist = "";
+            async function editarPlaylist(body, nuevoNombre) {
                 try {
-                const res = await fetch(`http://localhost:3000/playlists/${playlist_id}`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" }, 
-                            body: JSON.stringify(body)
-                        });
+                    const res = await fetch(`http://localhost:3000/playlists/${playlist_id}`, {
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" }, 
+                                body: JSON.stringify(body)
+                            });
 
                     if(!res.ok){
                         alert("Ocurrió un error editando la playlist.");
-                        window.location.href = `playlist.html?id=${playlist_id}`;
+                        window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
                         return;
                     }
 
                     alert("La playlist se editó correctamente.");
-                    window.location.href = `playlist.html?id=${playlist_id}`;
+                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
                 }
                 catch {
                     alert("Ocurrió un error editando la playlist.");
-                    window.location.href = `playlist.html?id=${playlist_id}`;
+                    window.location.href = `playlist.html?id=${playlist_id}&nombrePlaylist=${playlist.nombre}`;
                     return;
                 }
             }
