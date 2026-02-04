@@ -23,7 +23,7 @@
             <audio id="reproductor" controls></audio>
         </div>
 
-        <div class="botones-acciones" id="botones-acciones">
+        <div class="botones-musica" id="botones-musica">
             <button class="boton-subir" id="boton-editar">Editar Cancion</button>
             <button class="boton-borrar" id="boton-borrar">Borrar Cancion</button>
         </div>
@@ -66,7 +66,7 @@
                     reproductor.src = cancion.link_audio;
 
                     if(usuarioLoggeado.id === cancion.usuario_id) {
-                        document.getElementById("botones-acciones").style.display = "flex";
+                        document.getElementById("botones-musica").style.display = "flex";
                         document.getElementById("boton-editar").addEventListener("click", () => {
                             window.location.href = `editar-musica.html?id=${cancion.id}`;
                         })

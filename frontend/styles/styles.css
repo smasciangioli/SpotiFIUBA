@@ -510,8 +510,9 @@ header {
     max-width: 600px;
 }
 
-.botones-acciones {
+.botones-musica {
     display: none;
+    align-items: center;
 }
 
 .boton-borrar {
