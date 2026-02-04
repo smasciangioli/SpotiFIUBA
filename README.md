@@ -29,34 +29,7 @@ Alternativamente, se puede usar docker compose up -d --build, para ejecutarlo en
  <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/035ed996-aefd-4f9d-aa5c-df576cc844ab" />
  Para subir una cancion podremos hacerlo ya sea deade nuestro perfil con el boton visto en la captura o desde la pagina principal tocando el 'Más' de abajo a la derecha.
  <img width="1366" height="768" alt="Image" src="https://github.com/user-attachments/assets/196f221e-4eb3-428f-8883-97318c10d331" />
-asdsadasd
-asdasd
-asd
-asd
-asdas
-d
-as
-d
-asdas
-dasdasdsadasdasd
-asd
-asd
-as
-d
-as
-d
-asd
+ Aqui es importante completar todos los campos obligatorios con la informacion correspondiente de la cancion que queremos subir
 
-as
-dasd
 
-asd
-asd
-as
-d
-asd
-as
-d
-asd
-asda
-sd
+
