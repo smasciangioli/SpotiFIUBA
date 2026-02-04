@@ -31,7 +31,9 @@
                 const contenedorCanciones = document.getElementById("contenedor-canciones");
 
                 try {
-                    const res = await fetch("http://localhost:3000/canciones");
+                    const usuario = JSON.parse(localStorage.getItem("usuario"));
+                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}/canciones`);
+
 
                     if(!res.ok) {
                         alert("Hubo un problema cargando las canciones.");
