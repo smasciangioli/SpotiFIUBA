@@ -28,7 +28,7 @@ async function cargarPlaylists() {
                 </div>
             `;
             elemento.addEventListener("click", () =>
-                window.location.href = `playlist.html?id=${playlist.id}&nombrePlaylist=${playlist.nombre}`
+                window.location.href = `playlist.html?id=${playlist.id}&nombrePlaylist=${playlist.nombre}&usuarioID=${usuario_id}`
             )
             contenedorPlaylists.appendChild(elemento);
         });
