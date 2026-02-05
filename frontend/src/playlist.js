@@ -1,0 +1,94 @@
+const URLParametros = new URLSearchParams(window.location.search);
+const playlist_id = URLParametros.get("id");
+const playlist_nombre = URLParametros.get("nombrePlaylist");
+const selectorMusicas = document.getElementById("selector-musicas");
+
+async function cargarCancionesPlaylist() {
+    const contenedorCanciones = document.getElementById("contenedor-canciones");
+        const res = await fetch(`http://localhost:3000/playlists/${playlist_id}/canciones`);
+    try {
+        document.getElementById("titulo-canciones").textContent = playlist_nombre
+        if(!res.ok) {
+            alert("Hubo un problema cargando las canciones.");
+            return;
+        }
+
+        const canciones = await res.json();
+
+        contenedorCanciones.innerHTML = "";
+
+        canciones.forEach(cancion => {
+            const opcion = document.createElement("option");
+            opcion.value = cancion.id;
+            opcion.textContent = cancion.nombre;
+            selectorMusicas.appendChild(opcion);
+            const elemento = document.createElement("div");
+            elemento.classList.add("cancion-elemento");
+            
+            elemento.innerHTML = `
+                <img src="${cancion.link_portada || 'https://i.pinimg.com/736x/b1/56/d8/b156d88727d0be3f16e79af15f66a122.jpg'}" class="cancion-portada">
+                <div class="detalles-cancion">
+                    <h3 class="cancion-titulo">${cancion.nombre}</h3>
+                    <div class="cancion-artista-genero">
+                        <p class="datos">${cancion.artista} - ${cancion.genero}</p>
+                    </div>
+                </div>
+            `;
+            elemento.addEventListener("click", () =>
+                window.location.href = `musica.html?id=${cancion.id}`
+            )
+            contenedorCanciones.appendChild(elemento);
+        });
+    } 
+    catch {
+        alert("No se pudo conectar con el servidor.");
+        window.location.href = "lista-playlists.html";
+    }
+}
+
+cargarCancionesPlaylist();
+document.getElementById("boton-borrar-playlist").addEventListener("click", async function(){
+    if(confirm("Seguro que queres borrar la playlist?")) {
+        const resBorrar = await fetch(`http://localhost:3000/playlists/${playlist_id}`, {method: "DELETE"});
+
+        if(resBorrar.ok) {
+            alert("La playlist se borro correctamente.");
+            window.location.href = "lista-playlists.html";
+            return;
+        }
+        else {
+            alert("Hubo un problema borrando la playlist.");
+            return;
+        }
+    }
+})
+
+document.getElementById("boton-editar-playlist").addEventListener("click", () => {
+    window.location.href = `editar-playlist.html?id=${playlist_id}&nombrePlaylist=${playlist_nombre}`;
+})
+
+const botonBorrarMusicas = document.getElementById("boton-borrar-playlists");
+botonBorrarMusicas.addEventListener("click", async function() {
+    const cancion_id = selectorMusicas.value;
+    if (!cancion_id) {
+        alert("Selecciona una canción.")
+        return;
+    }
+    if(confirm("Seguro que queres borrar esta cancion de la playlist?")) {
+
+        try {
+            const respuesta = await fetch(`http://localhost:3000/playlists/${playlist_id}/cancion/${cancion_id}`, {method: "DELETE"});
+
+            if(!respuesta.ok) {
+                alert("Ocurrio un error.");
+                return;
+            }
+            alert("La cancion se borró correctamente.");
+            window.location.reload()
+        }
+        catch {
+            alert("Ocurrio un error.");
+            return;
+        }
+    }
+})

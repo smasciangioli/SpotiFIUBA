@@ -31,71 +31,21 @@
                  <button id="boton-canciones-usuario" class = "boton-subir">Tus Canciones</button>
 
             </div>
-        <div class = "cuadro-playlists">
-            <h2> Tus playlists</h2>
-            <ul>
-                <li>Playlist 1</li>
-                <li>Playlist 2</li>
-                <li>Playlist 3</li>
-            </ul>
-            
-       </div>     
-        
-        <div>
-        
-            <p id="logout">Cerrar Sesion</p>
+            <div class = "cuadro-playlists">
+                <h2> Tus playlists</h2>
+                <ul>
+                    <li>Playlist 1</li>
+                    <li>Playlist 2</li>
+                    <li>Playlist 3</li>
+                </ul>      
+            </div>     
+                <div>
+                    <p id="logout">Cerrar Sesion</p>
+                </div>
         </div>
-    </div>
           
 
-        <script>
-            async function validarLogin() {
-                const usuario = JSON.parse(localStorage.getItem("usuario"));
-
-                if (!usuario) {
-                    window.location.href = "index.html";
-                    return;
-                }
-
-                try {
-                    const res = await fetch(`http://localhost:3000/usuarios/${usuario.id}`)
-
-                    if(!res.ok){
-                        localStorage.clear();
-                        window.location.href = "index.html";
-                        return;
-                    }
-
-                    cargarPerfil(usuario)
-
-                } catch (fallo){
-                    console.error(fallo);
-                    localStorage.clear();
-                    window.location.href = "index.html";
-                }
-            }
-
-            function cargarPerfil(usuario) {
-                document.getElementById("nombre-perfil").textContent =
-                `Hola ${usuario.nombre}`;
-
-                document.getElementById("email-perfil").textContent =
-                usuario.email;
-                document.getElementById("carrera-perfil").textContent = usuario.carrera;
-                document.getElementById("boton-canciones-usuario").addEventListener("click", () => {
-                    window.location.href = `lista-canciones.html?id=${usuario.id}`;
-                })
-                const botonLogout = document.getElementById("logout")
-                botonLogout.addEventListener("click", () =>{
-                if(confirm("¿Estás seguro que querés cerrar sesion?")) {
-                    localStorage.removeItem("usuario");
-                    window.location.href = "index.html";
-                } 
-                });
-            }
-
-            validarLogin();
-            </script>
+        <script></script>
     </body>
 </html>
     
