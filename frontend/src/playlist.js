@@ -1,6 +1,7 @@
 const URLParametros = new URLSearchParams(window.location.search);
 const playlist_id = URLParametros.get("id");
 const playlist_nombre = URLParametros.get("nombrePlaylist");
+const usuarioID = URLParametros.get("usuarioID");
 const selectorMusicas = document.getElementById("selector-musicas");
 
 async function cargarCancionesPlaylist() {
@@ -42,7 +43,7 @@ async function cargarCancionesPlaylist() {
     } 
     catch {
         alert("No se pudo conectar con el servidor.");
-        window.location.href = "lista-playlists.html";
+        window.location.href = `lista-playlists.html?id_usuario=${usuarioID}`;
     }
 }
 
@@ -53,7 +54,7 @@ document.getElementById("boton-borrar-playlist").addEventListener("click", async
 
         if(resBorrar.ok) {
             alert("La playlist se borro correctamente.");
-            window.location.href = "lista-playlists.html";
+            window.location.href = `lista-playlists.html?id_usuario=${usuarioID}`;
             return;
         }
         else {
