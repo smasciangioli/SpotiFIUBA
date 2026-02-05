@@ -1,0 +1,539 @@
+body {
+    margin: 0;
+    background-color: #121212;
+    height: 200vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    background-color: #1c9fdb;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 10;
+    margin-bottom: 0;
+    justify-content: space-between;
+}
+
+.logo-spotifiuba {
+    cursor: pointer;
+}
+
+.negro {
+    color: #121212;
+}
+
+.blanco {
+    color: white;
+}
+
+.azul {
+    color: #1c9fdb;
+}
+
+.saludo {
+    margin-top: 0;
+    color: white;
+    font-size: 25px;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.separador {
+    border: none;
+    height: 2px;
+    background-color: #1c9fdb;
+    width: 25%;
+    margin-top: -5px;
+}
+
+.botones-header {
+
+    display: flex;
+    gap: 10px;
+    
+}
+
+.boton-header {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #1c9fdb;
+    background-color: #121212;
+}
+
+.boton-header:active {
+    background-color: #1f1f22;
+    transform: translateY(1px)
+}
+
+#boton-crear-usuario {
+    margin-right: 10px;
+}
+
+.input-login {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barra-input input {
+    background-color: #1f1f22;
+    border: none;
+    border-bottom: 2px solid #1c9fdb;
+    padding: 10px 5px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+}
+
+.barra-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 30px;
+}
+
+.barra-input label {
+    color: white;
+    padding-bottom: 5px;
+}
+
+.select-pagina {
+    background-color: #1f1f22;
+    border: none;
+    border-bottom: 2px solid #1c9fdb;
+    padding: 10px 5px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.link-registro {
+    color: #1c9fdb;
+    cursor: pointer;
+}
+
+#subir-musica {
+    position: fixed;
+    bottom: 60px;    
+    right: 60px;
+    color: white;
+    background-color: #1c9fdb;
+    border: hidden;
+    font-size: 80px;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius:50%;
+    font-size:35px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#subir-musica:active {
+    background-color: #10b1fc;
+    transform: translateY(1px)
+}
+
+#subir-musica .tooltip {
+    position: absolute;
+    bottom: 70px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#subir-musica:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#subir-musica:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.logo-spotifiuba .tooltip {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.logo-spotifiuba:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-spotifiuba:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#boton-crear-usuario .tooltip {
+    position: absolute;
+    top: 70px;
+    right: 0px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#boton-iniciar-sesion .tooltip {
+    position: absolute;
+    top: 70px;
+    right: 125px;
+
+    background-color: #1c9fdb;
+    color: white;
+    border-width: 1px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-color: white;
+    border-style: solid;
+    font-size: 14px;
+    
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease;
+}
+
+#boton-iniciar-sesion:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#boton-iniciar-sesion:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#boton-crear-usuario:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+#boton-crear-usuario:active .tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boton-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.boton-subir {
+    border-radius: 20px;
+    border: hidden;
+    padding: 10px 20px;
+    font-size: 17px;
+    color: white;
+    background-color: #1c9fdb;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+#nombre-perfil {
+    margin-top: 100px;
+    color: white;
+    font-size: 50px;
+    padding-left: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.barra-login {
+    position: fixed;
+    top: 60px; 
+    left: 0;
+
+    width: 260px;
+    height: calc(100vh - 60px);
+
+    background-color: #181818; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    z-index: 5;
+}
+
+.boton-barra {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+
+    background-color: #1c9fdb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.boton-barra:active {
+    background-color: #10b1fc;
+    transform: translateY(1px);
+}
+
+.no-logueado #boton-playlist {
+    display: none;
+}
+
+.logueado #boton-login {
+    display: none;
+}
+.perfil-main {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+.perfil-email {
+    color: white;
+    font-size: 18px;
+}
+
+
+.botones-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+    
+.cuadro-playlists {
+    margin-top: 40px;
+    display: inline-block;
+    text-align: left;
+    background-color: #1f1f22;
+    padding: 20px;
+    border-radius: 12px;
+    min-width: 300px;
+}
+
+.cuadro-playlists h2 {
+    color: #1c9fdb;
+    margin-bottom: 15px;
+}
+
+.cuadro-playlists ul {
+    list-style: none;
+    padding-left: 0;
+    color: white;
+}
+
+.cuadro-playlists li {
+    padding: 5px 0;
+}
+
+#boton-perfil {
+    margin-right: 10px;
+    display: none;
+}
+
+#logout {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(221, 23, 23);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.contenedor-canciones {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 40%;
+    gap: 5px;
+    border: 2px solid #10b1fc;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.cancion-elemento {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.cancion-elemento:hover {
+    background-color: #1f1f22;
+}
+
+.cancion-portada {
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.detalles-cancion {
+    padding-left: 10px;
+}
+
+.cancion-titulo {
+    font-size: 30px;
+    margin: 0;
+    color: #10b1fc;
+}
+
+.cancion-artista-genero {
+    margin-top: -10px;
+    font-size: 20px;
+    color: white;
+}
+
+.contenedor-cancion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+
+.portada-musica {
+    margin-top: 40px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+
+.titulo-musica {
+    font-size: 50px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #1c9fdb;
+}
+
+.datos-musica {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 25px;
+    border-radius: 15px;
+    background-color: #1c9fdb;
+
+}
+
+#audio,
+#reproductor {
+    width: 100%;
+    max-width: 600px;
+}
+
+.botones-musica {
+    display: none;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.boton-borrar {
+    color: white;
+    cursor: pointer;
+    background-color: rgb(221, 23, 23);
+    border-radius: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: hidden;
+    font-size: 17px;
+    margin-top: -10px;
+}
+
+.botones-borrar-musicas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}

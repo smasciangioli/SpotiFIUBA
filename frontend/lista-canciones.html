@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SpotiFIUBA</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
+                <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
+            </div>
+        </header>
+        <div class="saludo">
+            <p id="titulo-canciones"></p>
+            <hr class="separador">
+        </div>
+        <div class="contenedor-canciones" id="contenedor-canciones">
+            <div class="cancion-elemento">
+                <img src="PORTADA" class="cancion-portada">
+                <div class="detalles-cancion">
+                    <h3 class="cancion-titulo">Nombre de Cancion</h3>
+                    <div class="cancion-artista-genero">
+                        <p class="datos">Artista - Genero</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="boton-musica">
+            <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
+        </div>
+        <script src="src/lista-canciones.js"></script>
+    </body>
+</html>

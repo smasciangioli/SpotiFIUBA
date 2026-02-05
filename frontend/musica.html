@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SpotiFIUBA</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
+                <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
+            </div>
+        </header>
+
+        <div class="contenedor-cancion">
+            <img id="portada-musica" class="portada-musica">
+            <h1 id="titulo-musica" class="titulo-musica"></h1>
+            <div class="datos-musica">
+                <p id="autor-musica">De: </p>
+                <p id="usuario-musica">Subida Por: </p>
+                <p id="genero-musica">Genero: </p>
+            </div>
+            <audio id="reproductor" controls></audio>
+        </div>
+
+        <div class="botones-musica" id="botones-musica">
+            <button class="boton-subir" id="boton-editar">Editar Cancion</button>
+            <button class="boton-borrar" id="boton-borrar">Borrar Cancion</button>
+        </div>
+
+        <div class="botones-musica" id="botones-playlists">
+            <select class="select-pagina" name="playlists" id="selector-playlists">
+                <option value="">Selecciona una playlist.</option>
+            </select>
+            <button class="boton-subir" id="boton-playlists">Agregar a la Playlist</button>
+        </div>
+        <script src="src/musica.js"></script>
+    </body>
+</html>

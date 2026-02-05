@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SpotiFIUBA</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
+                <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
+            </div>
+        </header>
+        <div class="input-login">
+            <form id="form-editar">
+                <div class="barra-input">
+                    <label for="nombre">Nuevo Nombre de la Playlist: - Opcional</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+                <div class="barra-input">
+                    <label for="link_portada">Nuevo Link a Imagen de Portada de la Playlist: - Opcional</label>
+                    <input type="text" id="link_portada" name="link_portada">
+                </div>
+                <div class = "boton-wrapper">
+                    <button class= "boton-subir" type="submit">Editar Playlist</button>
+                </div>
+            </form>
+            <script src="src/editar-playlist.js"></script>
+    </body>
+</html>

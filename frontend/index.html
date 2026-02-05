@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SpotiFIUBA</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <div class="barra-login no-logueado" id="barra-login">
+            <h2 class = "azul"> Playlists </h2>
+            <br>
+    
+
+            <button class="boton-barra" id="boton-login"
+                onclick="window.location.href='iniciar-sesion.html'">
+                Iniciar sesión
+            </button>
+
+            <button class="boton-barra" id="boton-playlist"
+                onclick="window.location.href='new-playlist.html'">
+                Agregar playlist
+            </button>
+        </div>
+        <header>
+            <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
+                <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
+            </div>
+            <div class="botones-header">
+                <button class="boton-header" id="boton-iniciar-sesion" onclick="window.location.href='iniciar-sesion.html'">Iniciar Sesión<span class="tooltip">Ir a Iniciar Sesión</span></button>
+                <button class="boton-header" id="boton-crear-usuario" onclick="window.location.href='crear-usuario.html'">Crear Usuario<span class="tooltip">Ir a Crear Usuario</span></button>
+                <button class="boton-header" id="boton-perfil" onclick="window.location.href='usuario.html'">Perfil</button>
+            </div>
+        </header>
+        <div class="saludo">
+            <p>Bienvenido a Spoti<span class = "azul">FIUBA</span></p>
+            <hr class="separador">
+        </div>
+        <div id="boton-musica">
+            <button id="subir-musica"><h2>+</h2><span class="tooltip">Ir a Subir Música</span></button>
+        </div>
+        <div class="botones-acciones">
+            <button class="boton-subir" id="boton-lista-playlists">Mis Playlists</button>
+            <button class="boton-subir" id="boton-lista-canciones" onclick="window.location.href='lista-canciones.html'">Canciones</button>    
+        </div>
+        <script src="src/index.js"></script>
+    </body>
+</html>

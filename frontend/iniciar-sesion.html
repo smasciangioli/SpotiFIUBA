@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>SpotiFIUBA</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+    <body>
+        <header>
+        <div class="logo-spotifiuba" onclick="window.location.href='index.html'">
+            <span class="negro">Spoti</span><span class="blanco">FIUBA</span><span class="tooltip">Ir a la Página Principal</span>
+        </div>
+        </header>
+        <div class="input-login">
+            <form>
+                
+                <div class="barra-input">
+                    <label for="email">Correo Electrónico (email, gmail, etc):</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="barra-input">
+                    <label for="contrasenia">Contraseña:</label>
+                    <input type="password" id="contrasenia" name="contrasenia">
+                </div>
+                
+            </form>
+            <div class = "boton-wrapper">
+                <button onclick = "login()" class= "boton-subir">Iniciar Sesion</button>
+            </div>
+            <div class="link-registro" onclick="window.location.href='crear-usuario.html'">
+                    <p>¿No tenés una cuenta? Hacé click para ir a crear tu usuario.</p>
+            </div>
+        </div>  
+        <script src="src/iniciar-sesion.js"></script>  
+    </body>
+</html>
